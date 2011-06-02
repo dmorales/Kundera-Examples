@@ -17,15 +17,21 @@ import com.impetus.kundera.api.ColumnFamily;
  */
 @Entity
 @ColumnFamily(family = "Username", keyspace = "Examples")
-public class Username implements Serializable
+public class UserName implements Serializable
 {
-    private static final long serialVersionUID = 1L;
-
-    @Id
-    private String id;
-
-    @Column(name = "userName")
+    private static final long serialVersionUID = 1L;   
+    
+    @Id    
     private String userName;
+    
+    @Column(name = "id")
+    private String id;
+    
+    
+    public UserName(String userName, String id) {
+    	this.userName = userName;
+    	this.id = id;
+    }
 
     /**
      * @return the id

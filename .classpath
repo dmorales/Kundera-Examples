@@ -3,6 +3,7 @@
 	<classpathentry including="**/*.java" kind="src" output="target/test-classes" path="src/test/java"/>
 	<classpathentry including="**/*.java" kind="src" path="src/main/java"/>
 	<classpathentry excluding="**/*.java" kind="src" path="src/main/resources"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Kundera"/>
 	<classpathentry kind="var" path="M2_REPO/javax/persistence/persistence-api/1.0/persistence-api-1.0.jar"/>
 	<classpathentry kind="var" path="M2_REPO/ant/ant/1.6.5/ant-1.6.5.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/apache/cassandra/apache-cassandra/0.7.4/apache-cassandra-0.7.4.jar"/>
@@ -52,6 +53,7 @@
 	<classpathentry kind="var" path="M2_REPO/xmlenc/xmlenc/0.52/xmlenc-0.52.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/apache/hbase/zookeeper/zookeeper/3.2.2/zookeeper-3.2.2.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Kundera"/>
+	<classpathentry kind="lib" path="lib/kundera-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="lib/lucandra.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

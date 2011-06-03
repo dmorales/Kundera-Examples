@@ -261,7 +261,7 @@
 		     <version>2.5.3</version>
 		</dependency>
 		<dependency>
-			<groupId>com.kundera.kundera</groupId>
+			<groupId>com.impetus.kundera</groupId>
 			<artifactId>kundera</artifactId>
 			<version>1.1.1-SNAPSHOT</version>
 		</dependency>

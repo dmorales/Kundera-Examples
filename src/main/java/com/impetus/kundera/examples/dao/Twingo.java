@@ -15,11 +15,21 @@
  */
 package com.impetus.kundera.examples.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceException;
 
-import com.impetus.kundera.examples.entities.User;
-import com.impetus.kundera.examples.entities.UserName;
 
+import com.impetus.kundera.examples.entities.mongo.Follower;
+import com.impetus.kundera.examples.entities.mongo.Friend;
+import com.impetus.kundera.examples.entities.mongo.TimeLine;
+import com.impetus.kundera.examples.entities.mongo.Tweet;
+import com.impetus.kundera.examples.entities.mongo.User;
+import com.impetus.kundera.examples.entities.mongo.UserLine;
+import com.impetus.kundera.examples.entities.mongo.UserName;
+import com.impetus.kundera.examples.utils.ExampleUtils;
 
 /**
  * Data access object class for mongo implementation of twitter.
@@ -40,13 +50,16 @@ public class Twingo extends SuperDao implements Twitter {
 	}
 	
 	@Override
-	public void addUser(String username, String password) {
-		User user = new User(username, password);  	
+	public void addUser(String username, String password) {    	
+    	//Persist User Entity
+		String userId = ExampleUtils.getUniqueId();
+		User user = new User(username, password); 
+		user.setUserId(userId);
     	
         em.persist(user);     
         
         //Persist UserName entity (inverted index)
-        UserName un = new UserName(user.getUserName(), user.getId());
+        UserName un = new UserName(user.getUserName(), user.getUserId());
         em.persist(un);
 		
 	}
@@ -64,6 +77,121 @@ public class Twingo extends SuperDao implements Twitter {
 		
 		
 	}
+	
+	
+	public void registerUser(User user) {        	
+    	String userId = ExampleUtils.getUniqueId(); 
+    	
+    	//Persist User Entity
+    	user.setUserId(userId);
+        em.persist(user);     
+        
+        //Persist UserName entity (inverted index)
+        UserName un = new UserName(user.getUserName(), userId);
+        em.persist(un);
+    }
+    
+    public void followAFriend(User thisUser, String otherUserId) {
+    	String timestamp = "" + ExampleUtils.getCurrentTimestamp();
+    	//Add other user to my following list
+    	Friend friend = new Friend(otherUserId, timestamp);    	
+    	thisUser.startFollowing(friend);
+    	em.persist(thisUser);
+    	
+    	//Add myself to other user's follower list
+    	User otherUser = em.find(User.class, otherUserId);
+    	Follower follower = new Follower(thisUser.getUserId(), timestamp);
+    	otherUser.addFollower(follower);
+    	em.persist(otherUser);    	
+    }
+    
+    
+    public void addTweet(Tweet tweet) {
+    	//Persist Tweet
+    	tweet.setTweetId(ExampleUtils.getUniqueId());
+    	tweet.setAdded("" + ExampleUtils.getCurrentTimestamp());
+    	
+    	em.persist(tweet);
+    	
+    	//Persist User Line
+    	UserLine ul = em.find(UserLine.class, tweet.getUserId());
+    	if(ul == null) {
+    		ul = new UserLine(tweet.getUserId(), tweet.getTweetId());
+    	} else {
+    		ul.addTweet(tweet.getTweetId());
+    	}    	
+    	em.persist(ul);    	
+    	
+    	//Persist Time Line for this user    	
+    	TimeLine utl = em.find(TimeLine.class, tweet.getUserId());
+    	if(utl == null) {
+    		utl = new TimeLine();
+    		utl.setUserId(tweet.getUserId());    		
+    	}
+    	utl.addTweet(tweet.getTweetId());    	
+    	em.persist(utl);
+    	
+    	//Persist Time Line for all users who follow this one
+    	User user = em.find(User.class, tweet.getUserId());
+    	List<Follower> followers = user.getFollowers();
+    	if(followers != null && ! followers.isEmpty()) {
+    		for(Follower follower : followers) {
+        		TimeLine ftl = em.find(TimeLine.class, follower.getUserId());
+        		if(ftl == null) {
+        			ftl = new TimeLine();
+        			ftl.setUserId(follower.getUserId());
+        		}
+        		
+        		ftl.addTweet(tweet.getTweetId());    		
+        		em.persist(ftl);
+        	}  
+    	} 	      	
+    }  
+    
+    public Tweet getTweet(String tweetId) {
+    	Tweet tweet = em.find(Tweet.class, tweetId);
+    	return tweet;
+    }
+    
+    public List<Tweet> getAllTweets(String userId) {
+    	UserLine ul = em.find(UserLine.class, userId);
+    	List<String> tweetIds = ul.getTweets();
+    	
+    	List<Tweet> allTweets = new ArrayList<Tweet>();
+    	if(tweetIds != null && ! tweetIds.isEmpty()) {
+    		for(String tweetId : tweetIds) {
+        		allTweets.add(getTweet(tweetId));
+        	}
+    	}
+    	
+    	return allTweets;    	
+    }
+    
+    public List<Tweet> getTimeLine(String userId) {
+    	TimeLine tl = em.find(TimeLine.class, userId);
+    	List<String> tweetIds = tl.getTweets();
+    	
+    	List<Tweet> allTimeLine = new ArrayList<Tweet>();
+    	if(tweetIds != null && ! tweetIds.isEmpty()) {
+    		for(String tweetId : tweetIds) {
+    			allTimeLine.add(getTweet(tweetId));
+    		}
+    	}
+    	return allTimeLine;
+    }
+    
+    public User getUserById(String userId) {
+    	return em.find(User.class, userId);    	
+    }
+    
+    public User getUserByName(String userName) {
+    	UserName un = em.find(UserName.class, userName);
+    	if(un == null) {
+    		throw new PersistenceException("No user found with name " + userName);
+    	}
+    	User user = em.find(User.class, un.getUserId());
+    	return user;    	
+    }
 	
 	
 

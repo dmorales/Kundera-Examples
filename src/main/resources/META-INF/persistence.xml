@@ -33,15 +33,15 @@
 			<!--  <property name="kundera.client.implementation" value="com.impetus.kundera.hbase.client.HBaseClient.class"/> -->
 		</properties>
 	</persistence-unit>
-<!-- 	<persistence-unit name="test-unit-3">
+        <persistence-unit name="twingo">
 		<provider>com.impetus.kundera.ejb.KunderaPersistence</provider>
+		<class>com.impetus.tweengo.entity.User</class>
 		<properties>
 			<property name="kundera.nodes" value="localhost"/>
-			<property name="kundera.port" value="9165"/>
-			<property name="kundera.keyspace" value="Blog"/>
+			<property name="kundera.port" value="27017"/>
+			<property name="kundera.keyspace" value="twingotest"/>
 			<property name="kundera.dialect" value="mongodb"/>
-			<property name="kundera.client" value="com.impetus.kundera.client.MongoDefaultClient.class"/>
+			<property name="kundera.client" value="MongoDB"/>
 		</properties>
-	</persistence-unit>
--->
+	</persistence-unit>	
 </persistence>

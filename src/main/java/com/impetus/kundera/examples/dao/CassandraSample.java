@@ -29,7 +29,7 @@ public class CassandraSample
         // find tweets for a follower.
         
         Twissandra twissandra = new Twissandra();
-//        addUser(twissandra);
+        addUser(twissandra);
 //        searchAndFollow(twissandra);
         findAFriend(twissandra);
         findFollowers(twissandra);

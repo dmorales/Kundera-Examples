@@ -48,7 +48,7 @@ import com.impetus.kundera.examples.entities.Timeline;
 import com.impetus.kundera.examples.entities.Tweet;
 import com.impetus.kundera.examples.entities.User;
 import com.impetus.kundera.examples.entities.Userline;
-import com.impetus.kundera.examples.entities.Username;
+import com.impetus.kundera.examples.entities.UserName;
 
 
 /**
@@ -244,7 +244,7 @@ public class Twissandra extends SuperDao implements Twitter
     {
         User user = new User(username, password);
         em.persist(user);   
-        Username userName = new Username();
+        UserName userName = new UserName();
         userName.setId(user.getId());
         userName.setUserName(username);
         em.persist(userName);

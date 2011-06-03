@@ -9,6 +9,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import utils.ExampleUtils;
+
 import com.impetus.kundera.api.ColumnFamily;
 
 /**
@@ -49,7 +51,7 @@ public class User implements Serializable
      */
     public User(String userName, String password)
     {
-        this.id = userName;
+        this.id = ExampleUtils.getUniqueId();
         this.userName = userName;
         this.password = password;
     }

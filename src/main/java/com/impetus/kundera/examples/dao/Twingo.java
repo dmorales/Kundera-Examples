@@ -72,36 +72,11 @@ public class Twingo extends SuperDao implements Twitter {
 	
 	@Override
 	public void tweet(String userid, String tweetmsg, String userName) {
-		
-		
-	}
-
-	
-	@Override
-	public void follow(String thisUserId, String friendUserId) {
-		String timestamp = "" + ExampleUtils.getCurrentTimestamp();
-		
-    	//Add other user to my following list
-    	Friend friend = new Friend(friendUserId, timestamp);  
-    	User thisUser = em.find(User.class, thisUserId);
-    	
-    	thisUser.startFollowing(friend);
-    	em.persist(thisUser);
-    	
-    	//Add myself to other user's follower list
-    	User otherUser = em.find(User.class, friendUserId);
-    	Follower follower = new Follower(thisUser.getUserId(), timestamp);
-    	otherUser.addFollower(follower);
-    	em.persist(otherUser); 
-		
-	}
-	
-  
-
-    
-    public void addTweet(Tweet tweet) {
-    	//Persist Tweet
+		//Persist Tweet
+		Tweet tweet = new Tweet();		
     	tweet.setTweetId(ExampleUtils.getUniqueId());
+    	tweet.setUserId(userid);
+    	tweet.setBody(tweetmsg);    	
     	tweet.setAdded("" + ExampleUtils.getCurrentTimestamp());
     	
     	em.persist(tweet);
@@ -138,9 +113,28 @@ public class Twingo extends SuperDao implements Twitter {
         		ftl.addTweet(tweet.getTweetId());    		
         		em.persist(ftl);
         	}  
-    	} 	      	
-    }  
-    
+    	}	
+	}
+	
+	@Override
+	public void follow(String thisUserId, String friendUserId) {
+		String timestamp = "" + ExampleUtils.getCurrentTimestamp();
+		
+    	//Add other user to my following list
+    	Friend friend = new Friend(friendUserId, timestamp);  
+    	User thisUser = em.find(User.class, thisUserId);
+    	
+    	thisUser.startFollowing(friend);
+    	em.persist(thisUser);
+    	
+    	//Add myself to other user's follower list
+    	User otherUser = em.find(User.class, friendUserId);
+    	Follower follower = new Follower(thisUser.getUserId(), timestamp);
+    	otherUser.addFollower(follower);
+    	em.persist(otherUser); 		
+	} 
+
+   
     public Tweet getTweet(String tweetId) {
     	Tweet tweet = em.find(Tweet.class, tweetId);
     	return tweet;

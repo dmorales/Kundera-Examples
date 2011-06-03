@@ -59,9 +59,15 @@ public class TestMongoDB extends TestCase {
 		twitter.follow(user2.getUserId(), user1.getUserId());
 	}
 	
+	public void tweet() {
+		User user1 = twitter.getUserByName(this.user1.getUserName());
+		twitter.tweet(user1.getUserId(), "Kundera is so much fun!", user1.getUserName());
+	}
+	
 	public void test() {
 		//addUser();
-		follow();
+		//follow();
+		tweet();
 	}
 	
 

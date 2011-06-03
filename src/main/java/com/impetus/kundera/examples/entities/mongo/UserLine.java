@@ -30,7 +30,7 @@ import com.impetus.kundera.api.Document;
  */
 
 @Entity
-@Document(name="userlines", db="tweengotest")
+@Document(name="userlines", db="twingotest")
 public class UserLine {
 	@Id
 	@Column(name="user_id")

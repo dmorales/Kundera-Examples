@@ -30,7 +30,7 @@ import com.impetus.kundera.api.Document;
  */
 
 @Entity
-@Document(name="timelines", db="tweengotest")
+@Document(name="timelines", db="twingotest")
 public class TimeLine {	
 	@Id
 	@Column(name="user_id")

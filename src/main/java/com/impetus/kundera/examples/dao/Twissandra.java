@@ -383,4 +383,15 @@ public class Twissandra extends SuperDao implements Twitter
         System.out.println("followers for user:" + userName);
         return followers;
     }
+
+	
+	@Override
+	public void close() {
+		if(em != null) {
+			em.close();
+		}
+		
+	}
+    
+    
 }

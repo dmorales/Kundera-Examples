@@ -27,7 +27,7 @@ import com.impetus.kundera.api.Document;
  */
 
 @Entity
-@Document(name="tweets", db="tweengotest")
+@Document(name="tweets", db="twingotest")
 public class Tweet {	
 	@Id
 	@Column(name="tweet_id")

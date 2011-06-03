@@ -49,6 +49,12 @@ public class Twingo extends SuperDao implements Twitter {
 		}
 	}
 	
+	public void close() {
+		if(em != null) {
+			em.close();
+		}
+	}
+	
 	@Override
 	public void addUser(String username, String password) {    	
     	//Persist User Entity

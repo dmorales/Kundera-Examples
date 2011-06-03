@@ -27,7 +27,7 @@ import com.impetus.kundera.api.Document;
  */
 
 @Entity
-@Document(name="following", db="tweengotest")
+@Document(name="following", db="twingotest")
 public class Friend {
 	
 	@Id

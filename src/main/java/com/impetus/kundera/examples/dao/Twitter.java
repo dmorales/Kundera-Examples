@@ -3,9 +3,10 @@ package com.impetus.kundera.examples.dao;
 /**
  * The Interface Twitter.
  */
-public interface Twitter
-{
-    
+public interface Twitter {
+	
+	void close();
+	
     /**
      * Adds the user.
      *

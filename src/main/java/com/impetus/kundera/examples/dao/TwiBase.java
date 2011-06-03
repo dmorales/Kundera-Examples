@@ -76,5 +76,13 @@ public class TwiBase extends SuperDao implements Twitter
         // TODO Auto-generated method stub
         
     }
+    
+    @Override
+	public void close() {
+		if(em != null) {
+			em.close();
+		}
+		
+	}
 
 }

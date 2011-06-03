@@ -15,6 +15,11 @@
  */
 package com.impetus.kundera.examples;
 
+
+import com.impetus.kundera.examples.dao.Twingo;
+import com.impetus.kundera.examples.dao.Twitter;
+import com.impetus.kundera.examples.entities.mongo.User;
+
 import junit.framework.TestCase;
 
 /**
@@ -22,5 +27,30 @@ import junit.framework.TestCase;
  * @author amresh.singh
  */
 public class TestMongoDB extends TestCase {
+	User user1;
+	User user2;
+	Twitter twitter;
+	
+	@Override
+	protected void setUp() throws Exception {		
+		super.setUp();
+		
+		twitter = new Twingo("twingo");
+		
+		user1 = new User("user1", "password1");	
+		user2 = new User("user2", "password");		
+	}
+	
+	@Override
+	protected void tearDown() throws Exception {		
+		super.tearDown();
+		twitter.close();
+	}
+	
+	public void testAddUser() {
+		twitter.addUser(user1.getUserName(), user1.getPassword());
+		twitter.addUser(user2.getUserName(), user2.getPassword());
+	}
+	
 
 }

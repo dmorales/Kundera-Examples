@@ -38,7 +38,7 @@ public class TestMongoDB extends TestCase {
 		twitter = new Twingo("twingo");
 		
 		user1 = new User("user1", "password1");	
-		user2 = new User("user2", "password");		
+		user2 = new User("user2", "password2");		
 	}
 	
 	@Override
@@ -47,9 +47,21 @@ public class TestMongoDB extends TestCase {
 		twitter.close();
 	}
 	
-	public void testAddUser() {
+	
+	public void addUser() {
 		twitter.addUser(user1.getUserName(), user1.getPassword());
 		twitter.addUser(user2.getUserName(), user2.getPassword());
+	}
+	
+	public void follow() {
+		User user1 = twitter.getUserByName(this.user1.getUserName());
+		User user2 = twitter.getUserByName(this.user2.getUserName());		
+		twitter.follow(user2.getUserId(), user1.getUserId());
+	}
+	
+	public void test() {
+		//addUser();
+		follow();
 	}
 	
 

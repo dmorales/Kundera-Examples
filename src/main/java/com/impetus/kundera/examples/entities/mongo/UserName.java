@@ -32,7 +32,6 @@ import com.impetus.kundera.api.Document;
 public class UserName {
 	
 	@Id
-	@Column(name="user_name")
 	private String userName;
 	
 	@Column(name="user_id")

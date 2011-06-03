@@ -30,7 +30,6 @@ import com.impetus.kundera.api.Document;
 @Document(name="tweets", db="twingotest")
 public class Tweet {	
 	@Id
-	@Column(name="tweet_id")
 	private String tweetId;
 	
 	@Column(name="user_id")

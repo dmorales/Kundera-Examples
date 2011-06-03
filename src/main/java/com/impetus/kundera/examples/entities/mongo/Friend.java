@@ -31,7 +31,6 @@ import com.impetus.kundera.api.Document;
 public class Friend {
 	
 	@Id
-	@Column(name="user_id")
 	private String userId;
 	
 	@Column(name="following_since")

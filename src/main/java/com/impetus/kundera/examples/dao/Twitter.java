@@ -1,5 +1,7 @@
 package com.impetus.kundera.examples.dao;
 
+import com.impetus.kundera.examples.entities.mongo.User;
+
 /**
  * The Interface Twitter.
  */
@@ -30,5 +32,9 @@ public interface Twitter {
      * @param friend the friend
      */
     void follow(String userid, String friend);
+    
+    User getUserByName(String userName);
+    
+    User getUserById(String userId);
 
 }

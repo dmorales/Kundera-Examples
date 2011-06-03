@@ -33,7 +33,6 @@ import com.impetus.kundera.api.Document;
 @Document(name="timelines", db="twingotest")
 public class TimeLine {	
 	@Id
-	@Column(name="user_id")
 	private String userId;
 	
 	@Column(name="tweets")

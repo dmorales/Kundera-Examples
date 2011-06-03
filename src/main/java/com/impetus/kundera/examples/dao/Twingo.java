@@ -69,7 +69,6 @@ public class Twingo extends SuperDao implements Twitter {
         em.persist(un);
 		
 	}
-
 	
 	@Override
 	public void tweet(String userid, String tweetmsg, String userName) {
@@ -79,38 +78,26 @@ public class Twingo extends SuperDao implements Twitter {
 
 	
 	@Override
-	public void follow(String userid, String friend) {
+	public void follow(String thisUserId, String friendUserId) {
+		String timestamp = "" + ExampleUtils.getCurrentTimestamp();
 		
-		
-	}
-	
-	
-	public void registerUser(User user) {        	
-    	String userId = ExampleUtils.getUniqueId(); 
-    	
-    	//Persist User Entity
-    	user.setUserId(userId);
-        em.persist(user);     
-        
-        //Persist UserName entity (inverted index)
-        UserName un = new UserName(user.getUserName(), userId);
-        em.persist(un);
-    }
-    
-    public void followAFriend(User thisUser, String otherUserId) {
-    	String timestamp = "" + ExampleUtils.getCurrentTimestamp();
     	//Add other user to my following list
-    	Friend friend = new Friend(otherUserId, timestamp);    	
+    	Friend friend = new Friend(friendUserId, timestamp);  
+    	User thisUser = em.find(User.class, thisUserId);
+    	
     	thisUser.startFollowing(friend);
     	em.persist(thisUser);
     	
     	//Add myself to other user's follower list
-    	User otherUser = em.find(User.class, otherUserId);
+    	User otherUser = em.find(User.class, friendUserId);
     	Follower follower = new Follower(thisUser.getUserId(), timestamp);
     	otherUser.addFollower(follower);
-    	em.persist(otherUser);    	
-    }
-    
+    	em.persist(otherUser); 
+		
+	}
+	
+  
+
     
     public void addTweet(Tweet tweet) {
     	//Persist Tweet
@@ -198,7 +185,4 @@ public class Twingo extends SuperDao implements Twitter {
     	User user = em.find(User.class, un.getUserId());
     	return user;    	
     }
-	
-	
-
 }

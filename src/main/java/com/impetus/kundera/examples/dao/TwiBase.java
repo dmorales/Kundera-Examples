@@ -7,7 +7,7 @@ import java.util.UUID;
 
 import javax.persistence.EntityManager;
 
-import com.impetus.kundera.examples.entities.User;
+import com.impetus.kundera.examples.entities.UserBAK;
 
 /**
  * The Class TwiBase.

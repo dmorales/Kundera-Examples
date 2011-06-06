@@ -46,7 +46,7 @@ import com.impetus.kundera.examples.entities.Followers;
 import com.impetus.kundera.examples.entities.Friends;
 import com.impetus.kundera.examples.entities.Timeline;
 import com.impetus.kundera.examples.entities.Tweet;
-import com.impetus.kundera.examples.entities.User;
+import com.impetus.kundera.examples.entities.UserBAK;
 import com.impetus.kundera.examples.entities.Userline;
 import com.impetus.kundera.examples.entities.UserName;
 
@@ -75,7 +75,7 @@ public class Twissandra extends SuperDao implements Twitter
         try
         {
             startCassandraServer();
-            startSolandra();
+            //startSolandra();
             initClient();
             loadData();
            if(em ==null) {
@@ -97,7 +97,7 @@ public class Twissandra extends SuperDao implements Twitter
         }
     }
     
-    private void startSolandra() {
+   /* private void startSolandra() {
 
 
         CassandraUtils.cacheInvalidationInterval = 0; // real-time
@@ -116,7 +116,7 @@ public class Twissandra extends SuperDao implements Twitter
         }
     
         
-    }
+    }*/
     private  void loadData() throws org.apache.cassandra.config.ConfigurationException, TException, NotFoundException, InvalidRequestException 
     {
        
@@ -242,7 +242,7 @@ public class Twissandra extends SuperDao implements Twitter
      */
     public void addUser(String username, String password)
     {
-        User user = new User(username, password);
+        UserBAK user = new UserBAK(username, password);
         em.persist(user);   
         UserName userName = new UserName();
         userName.setId(user.getId());
@@ -331,12 +331,12 @@ public class Twissandra extends SuperDao implements Twitter
 
     
     
-    public User findAUser(String userName)
+    public UserBAK findAUser(String userName)
     {
         String usrSql = "Select a from User a where a.userName  =:userName";
         Query q = em.createQuery(usrSql);
         q.setParameter("userName", userName);
-        List<User> userLst = q.getResultList();
+        List<UserBAK> userLst = q.getResultList();
         return userLst.isEmpty()?null:userLst.get(0);
         
     }
@@ -392,6 +392,5 @@ public class Twissandra extends SuperDao implements Twitter
 		}
 		
 	}
-    
-    
+   
 }

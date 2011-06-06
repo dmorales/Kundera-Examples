@@ -3,7 +3,7 @@
 	http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
 	version="1.0">
 
-	<persistence-unit name="cassandra">
+	<persistence-unit name="cassandra1">
 		<provider>com.impetus.kundera.ejb.KunderaPersistence</provider>
 		
 		<properties>
@@ -19,7 +19,7 @@
 		
 	</persistence-unit>
 
-	<persistence-unit name="hbase">
+	<persistence-unit name="hbase1">
 		<provider>com.impetus.kundera.ejb.KunderaPersistence</provider>
 		
 		<properties>
@@ -34,8 +34,7 @@
 		</properties>
 	</persistence-unit>
 		<persistence-unit name="twingo">
-		<provider>com.impetus.kundera.ejb.KunderaPersistence</provider>
-		<class>com.impetus.tweengo.entity.User</class>
+		<provider>com.impetus.kundera.ejb.KunderaPersistence</provider>		
 		<properties>
 			<property name="kundera.nodes" value="localhost"/>
 			<property name="kundera.port" value="27017"/>

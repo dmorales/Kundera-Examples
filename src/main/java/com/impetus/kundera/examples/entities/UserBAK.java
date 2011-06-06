@@ -33,7 +33,7 @@ public class User implements Serializable
     /**
      * 
      */
-    public UserBAK()
+    public User()
     {
     }
 
@@ -47,7 +47,7 @@ public class User implements Serializable
      * @param password
      *            password.
      */
-    public UserBAK(String userName, String password)    {
+    public User(String userName, String password)    {
         
         this.userName = userName;
         this.password = password;

@@ -29,7 +29,7 @@ import junit.framework.TestCase;
 public class TestMongoDB extends TestCase {
 	User user1;
 	User user2;
-	Twitter twitter;
+	Twingo twitter;
 	
 	@Override
 	protected void setUp() throws Exception {		
@@ -55,7 +55,8 @@ public class TestMongoDB extends TestCase {
 	
 	public void follow() {
 		User user1 = twitter.getUserByName(this.user1.getUserName());
-		User user2 = twitter.getUserByName(this.user2.getUserName());		
+		User user2 = twitter.getUserByName(this.user2.getUserName());
+		
 		twitter.follow(user2.getUserId(), user1.getUserId());
 	}
 	

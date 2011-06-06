@@ -76,7 +76,8 @@ public class Twingo extends SuperDao implements Twitter {
 		Tweet tweet = new Tweet();		
     	tweet.setTweetId(ExampleUtils.getUniqueId());
     	tweet.setUserId(userid);
-    	tweet.setBody(tweetmsg);    	
+    	tweet.setBody(tweetmsg);    
+    	tweet.setDevice("Web");
     	tweet.setAdded("" + ExampleUtils.getCurrentTimestamp());
     	
     	em.persist(tweet);

@@ -15,12 +15,18 @@
  */
 package com.impetus.kundera.examples.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import com.impetus.kundera.examples.entities.Followers;
+import com.impetus.kundera.examples.entities.Friends;
+import com.impetus.kundera.examples.entities.Timeline;
+import com.impetus.kundera.examples.entities.Tweet;
 import com.impetus.kundera.examples.entities.User;
+import com.impetus.kundera.examples.entities.Userline;
 import com.impetus.kundera.examples.utils.ExampleUtils;
 
 /**
@@ -34,8 +40,7 @@ public class Twingo extends SuperDao implements Twitter {
 		if(em == null) {
 			try {
 				em = init(persistenceUnitName);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
+			} catch (Exception e) {				
 				e.printStackTrace();
 			}
 		}
@@ -56,70 +61,40 @@ public class Twingo extends SuperDao implements Twitter {
         em.persist(user);    		
 	}
 	
-	/*@Override
-	public void tweet(String userid, String tweetmsg, String userName) {
-		//Persist Tweet
-		Tweet tweet = new Tweet();		
-    	tweet.setTweetId(ExampleUtils.getUniqueId());
-    	tweet.setUserId(userid);
-    	tweet.setBody(tweetmsg);    	
-    	tweet.setTweetTimeStamp("" + ExampleUtils.getCurrentTimestamp());  	
+	@Override
+	public void follow(String thisUserId, String friendUserId) {    	
+    	Friends friend = new Friends(thisUserId, friendUserId);    	
+    	em.persist(friend);    	
     	
-    	em.persist(tweet);
-    	
-    	//Persist User Line
-    	Userline ul = em.find(UserLine.class, tweet.getUserId());
-    	if(ul == null) {
-    		ul = new UserLine(tweet.getUserId(), tweet.getTweetId());
-    	} else {
-    		ul.addTweet(tweet.getTweetId());
-    	}    	
-    	em.persist(ul);    	
-    	
-    	//Persist Time Line for this user    	
-    	TimeLine utl = em.find(TimeLine.class, tweet.getUserId());
-    	if(utl == null) {
-    		utl = new TimeLine();
-    		utl.setUserId(tweet.getUserId());    		
-    	}
-    	utl.addTweet(tweet.getTweetId());    	
-    	em.persist(utl);
-    	
-    	//Persist Time Line for all users who follow this one
-    	User user = em.find(User.class, tweet.getUserId());
-    	List<Follower> followers = user.getFollowers();
-    	if(followers != null && ! followers.isEmpty()) {
-    		for(Follower follower : followers) {
-        		TimeLine ftl = em.find(TimeLine.class, follower.getUserId());
-        		if(ftl == null) {
-        			ftl = new TimeLine();
-        			ftl.setUserId(follower.getUserId());
-        		}
-        		
-        		ftl.addTweet(tweet.getTweetId());    		
-        		em.persist(ftl);
-        	}  
-    	}	
-	}
+    	Followers follower = new Followers(friendUserId, thisUserId);    	
+    	em.persist(follower); 		
+	} 
 	
 	@Override
-	public void follow(String thisUserId, String friendUserId) {
-		String timestamp = "" + ExampleUtils.getCurrentTimestamp();
-		
-    	//Add other user to my following list
-    	Friend friend = new Friend(friendUserId, timestamp);  
-    	User thisUser = em.find(User.class, thisUserId);
+	public void tweet(String userid, String tweetmsg, String userName) {
+		//Persist Tweet			
+		Tweet tweet = new Tweet(userid, tweetmsg); 	    	
+    	em.persist(tweet);
     	
-    	thisUser.startFollowing(friend);
-    	em.persist(thisUser);
+    	Userline userLine = new Userline(userid, tweet.getTweetId(), tweetmsg);
+        em.persist(userLine);  	
     	
-    	//Add myself to other user's follower list
-    	User otherUser = em.find(User.class, friendUserId);
-    	Follower follower = new Follower(thisUser.getUserId(), timestamp);
-    	otherUser.addFollower(follower);
-    	em.persist(otherUser); 		
-	} 
-
+    	//Persist Time Line for this user    	
+        Timeline timeLine = new Timeline(userid, tweet.getTweetId(), tweetmsg);
+        em.persist(timeLine);
+    	
+    	//Persist Time Line for all users who follow this one
+        String followerSql = "Select f from Followers f where f.userId =:userId";
+        Query q = em.createQuery(followerSql);
+        q.setParameter("userId", userid);
+        List<Followers> followers = q.getResultList();
+        for (Followers follower: followers) {            
+            timeLine = new Timeline(follower.getFriendId(), tweet.getTweetId(), tweetmsg);
+            em.persist(timeLine);
+            
+        }   
+    	
+	}	
    
     public Tweet getTweet(String tweetId) {
     	Tweet tweet = em.find(Tweet.class, tweetId);
@@ -127,54 +102,42 @@ public class Twingo extends SuperDao implements Twitter {
     }
     
     public List<Tweet> getAllTweets(String userId) {
-    	UserLine ul = em.find(UserLine.class, userId);
-    	List<String> tweetIds = ul.getTweets();
+    	Query q = em.createQuery("Select ul from Userline ul where ul.userId =:userId");
+    	q.setParameter("userId", userId);
+    	
+    	List<Userline> userLines = q.getResultList();
     	
     	List<Tweet> allTweets = new ArrayList<Tweet>();
-    	if(tweetIds != null && ! tweetIds.isEmpty()) {
-    		for(String tweetId : tweetIds) {
-        		allTweets.add(getTweet(tweetId));
-        	}
-    	}
+    	if(userLines != null && ! userLines.isEmpty()) {
+    		for(Userline ul : userLines) {    			
+        		Tweet tweet = new Tweet();
+        		tweet.setTweetId(ul.getTweetId());
+        		tweet.setUserId(userId);
+        		tweet.setBody(ul.getTweetBody());
+        		tweet.setTweetTimeStamp(ul.getTimestamp());
+        		
+        		allTweets.add(tweet);
+    		}
+    		
+    	} 	
     	
     	return allTweets;    	
     }
     
-    public List<Tweet> getTimeLine(String userId) {
-    	TimeLine tl = em.find(TimeLine.class, userId);
-    	List<String> tweetIds = tl.getTweets();
+    public List<Timeline> getTimeLine(String userId) {
+    	Query q = em.createQuery("Select tl from Timeline tl where tl.userId =:userId");
+    	q.setParameter("userId", userId);
     	
-    	List<Tweet> allTimeLine = new ArrayList<Tweet>();
-    	if(tweetIds != null && ! tweetIds.isEmpty()) {
-    		for(String tweetId : tweetIds) {
-    			allTimeLine.add(getTweet(tweetId));
-    		}
-    	}
-    	return allTimeLine;
-    }*/
+    	List<Timeline> timeLines = q.getResultList();
+    	
+    	return timeLines;   	
+    }
     
     public User getUserById(String userId) {
     	return em.find(User.class, userId);    	
     }
 
-	/* (non-Javadoc)
-	 * @see com.impetus.kundera.examples.dao.Twitter#tweet(java.lang.String, java.lang.String, java.lang.String)
-	 */
-	@Override
-	public void tweet(String userid, String tweetmsg, String userName) {
-		// TODO Auto-generated method stub
-		
-	}
 
-	/* (non-Javadoc)
-	 * @see com.impetus.kundera.examples.dao.Twitter#follow(java.lang.String, java.lang.String)
-	 */
-	@Override
-	public void follow(String userid, String friend) {
-		// TODO Auto-generated method stub
-		
-	}   
-	
 	public User getUserByName(String userName) {
 		Query q = em.createQuery("select u from User u where u.userName like :userName");		
 		q.setParameter("userName", userName);	
@@ -185,8 +148,6 @@ public class Twingo extends SuperDao implements Twitter {
 		} else {
 			return users.get(0);
 		}
-	}
-    
-    
+	}  
 
 }

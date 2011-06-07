@@ -53,22 +53,22 @@ public class TestMongoDB extends TestCase {
 		twitter.addUser(user2.getUserName(), user2.getPassword());
 	}
 	
-	/*public void follow() {
+	public void follow() {
 		User user1 = twitter.getUserByName(this.user1.getUserName());
 		User user2 = twitter.getUserByName(this.user2.getUserName());
 		
-		twitter.follow(user2.getUserId(), user1.getUserId());
-	}*/
+		twitter.follow(user2.getId(), user1.getId());
+	}
 	
-	/*public void tweet() {
+	public void tweet() {
 		User user1 = twitter.getUserByName(this.user1.getUserName());
-		twitter.tweet(user1.getUserId(), "Kundera is so much fun!", user1.getUserName());
-	}*/
+		twitter.tweet(user1.getId(), "Kundera is so much fun!", user1.getUserName());
+	}
 	
 	public void test() {
-		addUser();
+		//addUser();
 		//follow();
-		//tweet();
+		tweet();
 	}
 	
 

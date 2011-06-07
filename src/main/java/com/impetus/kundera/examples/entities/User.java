@@ -29,29 +29,12 @@ public class User implements Serializable
 
     @Column(name = "password")
     private String password;
-
-    /**
-     * 
-     */
-    public UserBAK()
-    {
+    
+    public User(String userName, String password) {
+    	this.userName = userName;
+    	this.password = password;
     }
 
-    /**
-     * Constructor using fields.
-     * 
-     * @param id
-     *            userId.
-     * @param userName
-     *            user name.
-     * @param password
-     *            password.
-     */
-    public UserBAK(String userName, String password)    {
-        
-        this.userName = userName;
-        this.password = password;
-    }
 
     /**
      * @return the serialversionuid

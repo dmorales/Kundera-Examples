@@ -3,11 +3,7 @@
  */
 package com.impetus.kundera.examples.dao;
 
-import java.util.UUID;
-
 import javax.persistence.EntityManager;
-
-import com.impetus.kundera.examples.entities.UserBAK;
 
 /**
  * The Class TwiBase.

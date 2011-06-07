@@ -30,11 +30,14 @@ public class User implements Serializable
     @Column(name = "password")
     private String password;
     
+    public User() {
+    	
+    }
+    
     public User(String userName, String password) {
     	this.userName = userName;
     	this.password = password;
     }
-
 
     /**
      * @return the serialversionuid

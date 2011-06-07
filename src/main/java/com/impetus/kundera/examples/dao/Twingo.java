@@ -15,20 +15,12 @@
  */
 package com.impetus.kundera.examples.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceException;
+import javax.persistence.Query;
 
-
-import com.impetus.kundera.examples.entities.mongo.Follower;
-import com.impetus.kundera.examples.entities.mongo.Friend;
-import com.impetus.kundera.examples.entities.mongo.TimeLine;
-import com.impetus.kundera.examples.entities.mongo.Tweet;
-import com.impetus.kundera.examples.entities.mongo.User;
-import com.impetus.kundera.examples.entities.mongo.UserLine;
-import com.impetus.kundera.examples.entities.mongo.UserName;
+import com.impetus.kundera.examples.entities.User;
 import com.impetus.kundera.examples.utils.ExampleUtils;
 
 /**
@@ -60,30 +52,23 @@ public class Twingo extends SuperDao implements Twitter {
     	//Persist User Entity
 		String userId = ExampleUtils.getUniqueId();
 		User user = new User(username, password); 
-		user.setUserId(userId);
-    	
-        em.persist(user);     
-        
-        //Persist UserName entity (inverted index)
-        UserName un = new UserName(user.getUserName(), user.getUserId());
-        em.persist(un);
-		
+		user.setId(userId);    	
+        em.persist(user);    		
 	}
 	
-	@Override
+	/*@Override
 	public void tweet(String userid, String tweetmsg, String userName) {
 		//Persist Tweet
 		Tweet tweet = new Tweet();		
     	tweet.setTweetId(ExampleUtils.getUniqueId());
     	tweet.setUserId(userid);
-    	tweet.setBody(tweetmsg);    
-    	tweet.setDevice("Web");
-    	tweet.setAdded("" + ExampleUtils.getCurrentTimestamp());
+    	tweet.setBody(tweetmsg);    	
+    	tweet.setTweetTimeStamp("" + ExampleUtils.getCurrentTimestamp());  	
     	
     	em.persist(tweet);
     	
     	//Persist User Line
-    	UserLine ul = em.find(UserLine.class, tweet.getUserId());
+    	Userline ul = em.find(UserLine.class, tweet.getUserId());
     	if(ul == null) {
     		ul = new UserLine(tweet.getUserId(), tweet.getTweetId());
     	} else {
@@ -166,18 +151,42 @@ public class Twingo extends SuperDao implements Twitter {
     		}
     	}
     	return allTimeLine;
-    }
+    }*/
     
     public User getUserById(String userId) {
     	return em.find(User.class, userId);    	
     }
+
+	/* (non-Javadoc)
+	 * @see com.impetus.kundera.examples.dao.Twitter#tweet(java.lang.String, java.lang.String, java.lang.String)
+	 */
+	@Override
+	public void tweet(String userid, String tweetmsg, String userName) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/* (non-Javadoc)
+	 * @see com.impetus.kundera.examples.dao.Twitter#follow(java.lang.String, java.lang.String)
+	 */
+	@Override
+	public void follow(String userid, String friend) {
+		// TODO Auto-generated method stub
+		
+	}   
+	
+	public User getUserByName(String userName) {
+		Query q = em.createQuery("select u from User u where u.userName like :userName");		
+		q.setParameter("userName", userName);	
+		
+		List<User> users = q.getResultList();
+		if(users == null || users.isEmpty()) {
+			return null;
+		} else {
+			return users.get(0);
+		}
+	}
     
-    public User getUserByName(String userName) {
-    	UserName un = em.find(UserName.class, userName);
-    	if(un == null) {
-    		throw new PersistenceException("No user found with name " + userName);
-    	}
-    	User user = em.find(User.class, un.getUserId());
-    	return user;    	
-    }
+    
+
 }

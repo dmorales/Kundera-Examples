@@ -54,6 +54,11 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
+		<repository>
+            <id>riptano</id>
+            <name>riptano</name>
+            <url>http://mvn.riptano.com/content/repositories/public</url>
+        </repository>
 	</repositories>
 	<reporting>
 		<plugins>
@@ -192,6 +197,11 @@
 			<artifactId>cglib</artifactId>
 			<version>2.2</version>
 		</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+  			<artifactId>guava</artifactId>
+			<version>r06</version>
+	   </dependency>							
 				
 		<!-- Required for running  tests  for embedded cassandra mode-->
 		<dependency>
@@ -210,12 +220,24 @@
 			<artifactId>apache-cassandra</artifactId>
 			<version>0.7.4</version>
 		</dependency>
+		<!--
 		<dependency>
 		    <groupId>com.github.stephenc.scale7</groupId>
 		    <artifactId>scale7-pelops</artifactId>
 		    <version>0.913</version>
 		</dependency>
-
+		
+		--><dependency>
+		    <groupId>org.scale7</groupId>
+    		<artifactId>scale7-pelops</artifactId>
+		    <version>1.2-0.7.x-SNAPSHOT</version>
+		</dependency>
+        <dependency>
+            <groupId>org.safehaus.jug</groupId>
+            <artifactId>jug-asl</artifactId>
+            <version>2.0.0</version>
+			  <scope>test</scope>
+        </dependency>
 		<!-- Required for running  tests  for embedded cassandra mode-->
 		<dependency>
 			<groupId>org.cliffc</groupId>
@@ -238,6 +260,11 @@
 			<version>UNKNOWN</version>
 		</dependency>
  HBase depndencies-->
+ 		<dependency>
+			<groupId>org.apache.solr</groupId>
+			<artifactId>solandra</artifactId>
+			<version>UNKNOWN</version>
+		</dependency>
 		<dependency>
 		     <groupId>org.apache.hbase</groupId>
 		     <artifactId>hbase-core</artifactId>

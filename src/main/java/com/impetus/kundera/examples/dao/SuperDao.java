@@ -22,9 +22,8 @@ public class SuperDao
      * @return the entity manager
      * @throws Exception the exception
      */
-    protected EntityManager init(String persistenceUnitName) throws Exception
+    protected EntityManager init(String persistenceUnitName) 
     {
-        System.out.println("called ");
         Configuration conf = new Configuration();
         return conf.getEntityManager(persistenceUnitName);
 

@@ -51,7 +51,6 @@ public class Timeline implements Serializable
      */
     public Timeline(String userId, String tweetId, String tweetBody)
     {
-        super();
         this.userId = userId;
         this.tweetId = tweetId;
         this.tweetBody = tweetBody;

@@ -41,7 +41,6 @@ public class Tweet implements Serializable
      */
     public Tweet(String userId, String body)
     {
-        
         this.userId = userId;
         this.body = body;
         tweetTimeStamp = ((Long)(new java.util.Date().getTime())).toString();

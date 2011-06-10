@@ -25,7 +25,7 @@ import org.apache.cassandra.config.ColumnDefinition;
 import org.apache.cassandra.config.DatabaseDescriptor;
 import org.apache.cassandra.config.KSMetaData;
 import org.apache.cassandra.db.ColumnFamilyType;
-import org.apache.cassandra.db.marshal.BytesType;
+import org.apache.cassandra.db.marshal.UTF8Type;
 import org.apache.cassandra.locator.AbstractReplicationStrategy;
 import org.apache.cassandra.locator.SimpleStrategy;
 import org.apache.cassandra.service.EmbeddedCassandraService;
@@ -34,6 +34,7 @@ import org.apache.cassandra.thrift.CfDef;
 import org.apache.cassandra.thrift.InvalidRequestException;
 import org.apache.cassandra.thrift.KsDef;
 import org.apache.cassandra.thrift.NotFoundException;
+import org.apache.log4j.Logger;
 import org.apache.thrift.TException;
 import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.protocol.TProtocol;
@@ -63,23 +64,28 @@ public class Twissandra extends SuperDao implements Twitter
     /** The embedded server cassandra. */
     private static EmbeddedCassandraService cassandra;
 
+    /** The eservice. */
     static ExecutorService                    eservice;
 
+    /** The em. */
     private EntityManager em;
     
+    /** The client. */
     private Cassandra.Client client;
     
+    private static final Logger logger =  Logger.getLogger(Twissandra.class);
+    
+    /**
+     * Instantiates a new twissandra.
+     */
     public Twissandra()
     {
         try
         {
             startCassandraServer();
-            //startSolandra();
+            startSolandra();
             initClient();
             loadData();
-           if(em ==null) {
-               em = init("cassandra");
-           }
         }
         
         catch (ConfigurationException e)
@@ -96,7 +102,10 @@ public class Twissandra extends SuperDao implements Twitter
         }
     }
     
-   /* private void startSolandra() {
+    /**
+     * Start solandra.
+     */
+    private void startSolandra() {
 
 
         CassandraUtils.cacheInvalidationInterval = 0; // real-time
@@ -115,7 +124,16 @@ public class Twissandra extends SuperDao implements Twitter
         }
     
         
-    }*/
+    }
+    
+    /**
+     * Load data.
+     *
+     * @throws ConfigurationException the configuration exception
+     * @throws TException the t exception
+     * @throws NotFoundException the not found exception
+     * @throws InvalidRequestException the invalid request exception
+     */
     private  void loadData() throws org.apache.cassandra.config.ConfigurationException, TException, NotFoundException, InvalidRequestException 
     {
        
@@ -158,6 +176,13 @@ public class Twissandra extends SuperDao implements Twitter
         DatabaseDescriptor.setTableDefinition(metadata, DatabaseDescriptor.getDefsVersion());
     }
     
+    /**
+     * Standard cfmd.
+     *
+     * @param ksName the ks name
+     * @param cfName the cf name
+     * @return the cF meta data
+     */
     private static CFMetaData standardCFMD(String ksName, String cfName)
     {
         /**
@@ -169,15 +194,16 @@ public class Twissandra extends SuperDao implements Twitter
          *  int keyCacheSavePeriodInSeconds, int memTime, Integer memSize, Double memOps, 
          *  Map<ByteBuffer, ColumnDefinition> column_metadata
          */
-        return new CFMetaData(ksName, cfName, ColumnFamilyType.Standard, BytesType.instance, null,"colfamily",
+        return new CFMetaData(ksName, cfName, ColumnFamilyType.Standard, UTF8Type.instance, null,"colfamily",
                               Double.valueOf("0"),Double.valueOf("0"),Double.valueOf("0"),0,
-                              BytesType.instance,0,0,0,0,0,Integer.valueOf(0),Double.valueOf("0"),new HashMap<ByteBuffer, ColumnDefinition>());
+                              UTF8Type.instance,0,0,0,0,0,Integer.valueOf(0),Double.valueOf("0"),new HashMap<ByteBuffer, ColumnDefinition>());
     }
+    
     /**
      * Start cassandra server.
-     * @throws ConfigurationException 
      *
-     * @throws Exception the exception
+     * @throws IOException Signals that an I/O exception has occurred.
+     * @throws ConfigurationException the configuration exception
      */
     private static void startCassandraServer() throws IOException, ConfigurationException
     {
@@ -189,6 +215,9 @@ public class Twissandra extends SuperDao implements Twitter
         }
     }
 
+    /**
+     * Inits the client.
+     */
     private void initClient()
     {
         TSocket socket = new TSocket("127.0.0.1", 9165);
@@ -241,13 +270,10 @@ public class Twissandra extends SuperDao implements Twitter
      */
     public void addUser(String username, String password)
     {
+        em = init("cassandra");
         User user = new User(username, password);
+        user.setId(username);
         em.persist(user);   
-       
-//        User found = em.find(User.class,userid);
-////        System.out.println(found !=null);
-//        System.out.println("Added a new User: " + found.getUserName() + found.getPassword());
-//        System.out.println(em.find(Username.class, userid) != null);
      }
     
     
@@ -258,17 +284,14 @@ public class Twissandra extends SuperDao implements Twitter
      */
     public void tweet(String userName, String userId, String tweetMsg)
     {
-//        String tweetId = "tweet_"+userId;
+        em = init("cassandra");
         Tweet tweet = new Tweet(userId, tweetMsg);
         em.persist(tweet);
-        Tweet found = em.find(Tweet.class, tweet.getTweetId());
-//        System.out.println(found != null);
-//        System.out.println("New tweet added: " + found.getBody());
         Userline userLine = new Userline(userId, tweet.getTweetId(), tweetMsg);
         em.persist(userLine);
         Timeline timeLine = new Timeline(userId, tweet.getTweetId(), tweetMsg);
         em.persist(timeLine);
-        System.out.println("Adding tweet for User::" + userName);
+        logger.info("Adding tweet for User::" + userName);
         //Get all your followers and add tweet to their entry too.
         String followerSql = "Select f from Followers f where f.userId =:userId";
         Query q = em.createQuery(followerSql);
@@ -276,13 +299,9 @@ public class Twissandra extends SuperDao implements Twitter
         List<Followers> followers = q.getResultList();
         for (Followers follower: followers)
         {
-            System.out.println("Adding tweet for followers::" + follower.getFriendId());
+            logger.info("Adding tweet for followers::" + follower.getFriendId());
             timeLine = new Timeline(follower.getFriendId(), tweet.getTweetId(), tweetMsg);
             em.persist(timeLine);
-            Timeline tm = em.find(Timeline.class,(follower.getFriendId()+tweet.getTweetId()));
-            System.out.println(tm.getTweetBody());
-            System.out.println(tm.getUserId());
-            
         }
         
     }
@@ -293,42 +312,64 @@ public class Twissandra extends SuperDao implements Twitter
      */
     public void follow(String userid, String friend)
     {
+        em = init("cassandra");
         Friends friends = new Friends(userid, friend);
         em.persist(friends);
         Followers follower = new Followers(userid, friend);
         em.persist(follower);
     }
     
+    /**
+     * Find a friend.
+     *
+     * @param userId the user id
+     * @param userName the user name
+     */
     public void findAFriend(String userId, String userName)
     {
+        em = init("cassandra");
         String sql = "select a from Friends a where a.userId  =:userId";   
         Query q = em.createQuery(sql);
         q.setParameter("userId", userId);
         
-        System.out.println("finding friend for::" + userName);
+        logger.info("finding friend for::" + userName);
         
         List<Friends> friendLst = q.getResultList();
         for(Friends friend : friendLst)
         {
-            System.out.println("Found friend::" + friend.getFriendId());    
+            logger.info("Found friend::" + friend.getFriendId());    
         }
         
     }
     
+    /**
+     * Find followers.
+     *
+     * @param userId the user id
+     * @param userName the user name
+     */
     public void findFollowers(String userId, String userName)
     {
+        em = init("cassandra");
         List<Followers> followers = getFollowers(userId, userName);
         for(Followers follower : followers)
         {
-            System.out.println("Found followers::" + follower.getFriendId());    
+            logger.info("Found followers::" + follower.getFriendId());    
         }
         
     }
 
     
     
+    /**
+     * Find a user.
+     *
+     * @param userName the user name
+     * @return the user
+     */
     public User findAUser(String userName)
     {
+        em = init("cassandra");
         String usrSql = "Select a from User a where a.userName  =:userName";
         Query q = em.createQuery(usrSql);
         q.setParameter("userName", userName);
@@ -337,50 +378,71 @@ public class Twissandra extends SuperDao implements Twitter
         
     }
 
+    /**
+     * Find tweets.
+     *
+     * @param userName the user name
+     * @param userId the user id
+     */
     public void findTweets(String userName, String userId)
     {
-      System.out.println("Finding tweets for ::" + userName);
-      String tweetSql = "Select t from Timeline t where t.userId like :userId";
+        em = init("cassandra");
+        logger.info("Finding tweets for ::" + userName);
+      String tweetSql = "Select t from Timeline t where t.userId =:userId";
       Query q = em.createQuery(tweetSql);
       q.setParameter("userId", userId);
       List<Timeline> tweets = q.getResultList();
-      System.out.println(tweets.isEmpty());
       for(Timeline tweet : tweets)
       {
-          System.out.println(tweet.getTweetBody());
+          logger.info(tweet.getTweetBody());
       }
     }
 
+    /**
+     * Find tweets for friends.
+     *
+     * @param userName the user name
+     * @param userId the user id
+     */
     public void findTweetsForFriends(String userName, String userId)
     {
-      System.out.println("Finding tweets for followers of ::" + userName);
+        em = init("cassandra");
+        logger.info("Finding tweets for followers of ::" + userName);
       List<Followers> followers = getFollowers(userId, userName);
       String tweetSql = "Select t from Timeline t where t.userId =:userId";
 //      Query q = em.createQuery(tweetSql);
       for(Followers follower : followers)
       {
           Query q = em.createQuery(tweetSql);
-          System.out.println("user is ::" + follower.getFriendId());
           q.setParameter("userId", follower.getFriendId());
          List<Timeline> tweets = q.getResultList();
       for(Timeline tweet : tweets)
       {
-          System.out.println(tweet.getTweetBody());
+          logger.info(tweet.getTweetBody());
       }
       }
     }
     
+    /**
+     * Gets the followers.
+     *
+     * @param userId the user id
+     * @param userName the user name
+     * @return the followers
+     */
     private List<Followers> getFollowers(String userId, String userName)
     {
         String sql = "select a from Followers a where a.userId  =:userId";   
         Query q = em.createQuery(sql);
         q.setParameter("userId", userId);
         List<Followers> followers = q.getResultList();
-        System.out.println("followers for user:" + userName);
         return followers;
     }
 
 	
+	/* (non-Javadoc)
+	 * @see com.impetus.kundera.examples.dao.Twitter#close()
+	 */
 	@Override
 	public void close() {
 		if(em != null) {

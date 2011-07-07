@@ -66,7 +66,9 @@ public class Twingo extends SuperDao implements Twitter
     @Override
     public void savePreference(String userId, Preference preference)
     {
-
+        User user = em.find(User.class, userId);
+        user.setPreference(preference);
+        em.persist(user);
     }
 
     @Override

@@ -15,22 +15,22 @@
  */
 package com.impetus.kundera.examples;
 
+import junit.framework.TestCase;
+
 import com.impetus.kundera.examples.dao.Twingo;
 import com.impetus.kundera.examples.dao.Twitter;
-import com.impetus.kundera.examples.entities.User;
-
-import junit.framework.TestCase;
+import com.impetus.kundera.examples.entities.Preference;
 
 /**
  * Test case for MongoDB
  * 
  * @author amresh.singh
  */
-public class TestMongoDB extends TestCase
+public class TestTwingo extends TestCase
 {
-    User user1;
+    String userId1;
 
-    User user2;
+    String userId2;
 
     Twitter twitter;
 
@@ -38,6 +38,8 @@ public class TestMongoDB extends TestCase
     protected void setUp() throws Exception
     {
         super.setUp();
+        userId1 = "0001";
+        userId2 = "0002";
 
         twitter = new Twingo("twingo");
 
@@ -52,8 +54,14 @@ public class TestMongoDB extends TestCase
 
     public void addUser()
     {
-        twitter.addUser("0001", "Amresh", "password1", "married");
-        twitter.addUser("0002", "Saurabh", "password2", "single");
+        twitter.addUser(userId1, "Amresh", "password1", "married");
+        twitter.addUser(userId2, "Saurabh", "password2", "single");
+    }
+
+    public void savePreference()
+    {
+        twitter.savePreference(userId1, new Preference("Motif", "1"));
+        twitter.savePreference(userId2, new Preference("High Contrast", "2"));
     }
 
     /*

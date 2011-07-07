@@ -20,6 +20,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.impetus.kundera.examples.utils.ExampleUtils;
+
 /**
  * Entity class for User Preferences
  * 
@@ -45,9 +47,9 @@ public class Preference
 
     }
 
-    public Preference(String prefId, String theme, String privacyLevel)
+    public Preference(String theme, String privacyLevel)
     {
-        this.preferenceId = prefId;
+        this.preferenceId = ExampleUtils.getUniqueId();
         this.websiteTheme = theme;
         this.privacyLevel = privacyLevel;
     }

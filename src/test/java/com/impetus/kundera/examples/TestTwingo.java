@@ -64,6 +64,14 @@ public class TestTwingo extends TestCase
         twitter.savePreference(userId2, new Preference("High Contrast", "3"));
     }
     
+    public void addExternalLinks() {
+        twitter.addExternalLink(userId1, "Facebook", "http://facebook.com/coolnerd");
+        twitter.addExternalLink(userId1, "LinkedIn", "http://linkedin.com/in/devilmate");
+        
+        twitter.addExternalLink(userId2, "GooglePlus", "http://plus.google.com/inviteme");
+        twitter.addExternalLink(userId2, "Yahoo", "http://yahoo.com/profiles/itsmeamry");        
+    }
+    
     public void addTweet() {
         twitter.addTweet(userId1, "Here is my first tweet", "Web");
         twitter.addTweet(userId1, "Here is my second tweet", "Mobile");
@@ -88,7 +96,9 @@ public class TestTwingo extends TestCase
     {
         //addUser();
         //savePreference();
-        addTweet();
+        //addExternalLinks();
+        //addTweet();
+       
         // follow();
         // tweet();
     }

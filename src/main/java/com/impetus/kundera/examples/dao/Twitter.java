@@ -20,7 +20,7 @@ public interface Twitter
 
     void savePreference(String userId, Preference preference);
 
-    void addExternalLink(String userId, ExternalLink externalLink);
+    void addExternalLink(String userId, String linkType, String linkAddress);
 
     void startFollowing(String userId, String friendUserId);
 

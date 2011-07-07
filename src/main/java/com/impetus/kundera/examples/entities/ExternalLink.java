@@ -20,6 +20,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.impetus.kundera.examples.utils.ExampleUtils;
+
 /**
  * Entity class for user's External link details
  * 
@@ -45,9 +47,9 @@ public class ExternalLink
 
     }
 
-    public ExternalLink(String id, String type, String address)
+    public ExternalLink(String type, String address)
     {
-        this.extLinkId = id;
+        this.extLinkId = ExampleUtils.getUniqueId();
         this.linkType = type;
         this.linkAddress = address;
     }

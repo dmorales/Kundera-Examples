@@ -72,6 +72,15 @@ public class Twingo extends SuperDao implements Twitter
     }
     
     @Override
+    public void addExternalLink(String userId, String linkType, String linkAddress)
+    {
+        User user = em.find(User.class, userId);
+        user.addExternalLink(new ExternalLink(linkType, linkAddress));     
+        
+        em.persist(user);        
+    }
+    
+    @Override
     public void addTweet(String userId, String tweetBody, String device)
     {
         User user = em.find(User.class, userId);
@@ -79,11 +88,7 @@ public class Twingo extends SuperDao implements Twitter
         em.persist(user);
     }
 
-    @Override
-    public void addExternalLink(String userId, ExternalLink externalLink)
-    {
-
-    }
+    
 
     @Override
     public void addFollower(String userId, String followerUserId)

@@ -4,95 +4,179 @@
 package com.impetus.kundera.examples.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
-import javax.persistence.Column;
+import javax.persistence.CascadeType;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
-import com.impetus.kundera.api.ColumnFamily;
 
 /**
  * @author impetus
  * 
  */
 @Entity
-@ColumnFamily(family = "User", keyspace = "Examples")
-public class User implements Serializable
-{
-    private static final long serialVersionUID = 1L;
+@Table(name="users", schema="Kundera-Examples")
+public class User implements Serializable {
 
     @Id
-    private String id;
-
-    @Column(name = "userName")
-    private String userName;
-
-    @Column(name = "password")
-    private String password;
+    private String userId;
+    
+    //Embedded object, will persist co-located
+	@Embedded
+	private PersonalDetail personalDetail;
+	
+	//Embedded collection, will persist co-located
+	@Embedded
+	private List<Tweet> tweets;	
+	
+	//Embedded collection, will persist co-located
+	@Embedded
+	private List<User> friends;	//List of users whom I follow
+	
+	//Embedded collection, will persist co-located
+	@Embedded
+	private List<User> followers;	//List of users who are following me
+	
+	//One-to-one, will be persisted separately
+	@OneToOne(cascade={CascadeType.ALL}, fetch=FetchType.EAGER)
+	private Preference preference;	
+	
+	//One to many, will be persisted separately
+	@OneToMany (cascade={CascadeType.ALL}, fetch=FetchType.EAGER)	
+	private Set<ExternalLink> externalLinks;	
+	
     
     public User() {
     	
     }
-    
-    public User(String userName, String password) {
-    	this.userName = userName;
-    	this.password = password;
-    }
 
-    /**
-     * @return the serialversionuid
-     */
-    public static long getSerialversionuid()
-    {
-        return serialVersionUID;
-    }
+	/**
+	 * @return the userId
+	 */
+	public String getUserId() {
+		return userId;
+	}
 
-    /**
-     * @return the id
-     */
-    public String getId()
-    {
-        return id;
-    }
 
-    /**
-     * @return the userName
-     */
-    public String getUserName()
-    {
-        return userName;
-    }
+	/**
+	 * @param userId the userId to set
+	 */
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
 
-    /**
-     * @return the password
-     */
-    public String getPassword()
-    {
-        return password;
-    }
 
-    /**
-     * @param id the id to set
-     */
-    public void setId(String id)
-    {
-        this.id = id;
-    }
+	/**
+	 * @return the personalDetail
+	 */
+	public PersonalDetail getPersonalDetail() {
+		return personalDetail;
+	}
 
-    /**
-     * @param userName the userName to set
-     */
-    public void setUserName(String userName)
-    {
-        this.userName = userName;
-    }
 
-    /**
-     * @param password the password to set
-     */
-    public void setPassword(String password)
-    {
-        this.password = password;
-    }
+	/**
+	 * @param personalDetail the personalDetail to set
+	 */
+	public void setPersonalDetail(PersonalDetail personalDetail) {
+		this.personalDetail = personalDetail;
+	}
+
+
+	/**
+	 * @return the tweets
+	 */
+	public List<Tweet> getTweets() {
+		return tweets;
+	}
+
+
+	/**
+	 * @param tweets the tweets to set
+	 */
+	public void addTweet(Tweet tweet) {
+		if(this.tweets == null || this.tweets.isEmpty()) {
+			this.tweets = new ArrayList<Tweet>();
+		}
+		this.tweets.add(tweet);
+	}	
+
+	/**
+	 * @return the preference
+	 */
+	public Preference getPreference() {
+		return preference;
+	}
+
+
+	/**
+	 * @param preference the preference to set
+	 */
+	public void setPreference(Preference preference) {
+		this.preference = preference;
+	}
+
+
+	/**
+	 * @return the externalLinks
+	 */
+	public Set<ExternalLink> getExternalLinks() {
+		return externalLinks;
+	}
+
+
+	/**
+	 * @param imDetails the imDetails to set
+	 */
+	public void addExternalLink(ExternalLink externalLink) {
+		if(this.externalLinks == null || this.externalLinks.isEmpty()) {
+			this.externalLinks = new HashSet<ExternalLink>();
+		}
+		
+		this.externalLinks.add(externalLink);		
+	}
+
+	/**
+	 * @return the friends
+	 */
+	public List<User> getFriends() {
+		return friends;
+	}
+
+	/**
+	 * @param friends the friends to set
+	 */
+	public void addFriend(User friend) {
+		if(this.friends == null || this.friends.isEmpty()) {
+			this.friends = new ArrayList<User>();
+		}		
+		this.friends.add(friend);
+	}
+
+	/**
+	 * @return the followers
+	 */
+	public List<User> getFollowers() {
+		return followers;
+	}
+
+	/**
+	 * @param followers the followers to set
+	 */
+	public void addFollower(User follower) {
+		if(this.followers == null || this.followers.isEmpty()) {
+			this.followers = new ArrayList<User>();
+		}
+		
+		this.followers.add(follower);
+	}	
 
 }

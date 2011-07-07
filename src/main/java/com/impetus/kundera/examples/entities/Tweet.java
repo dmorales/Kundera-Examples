@@ -1,114 +1,102 @@
+/*
+ * Copyright 2011 Impetus Infotech.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.impetus.kundera.examples.entities;
 
-import java.io.Serializable;
+import javax.persistence.Embeddable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+/**
+ * Class for Tweets
+ * @author amresh.singh
+ */
 
-import com.impetus.kundera.api.ColumnFamily;
+@Embeddable
+public class Tweet {
+	
+	private String tweetId;
+	
+	private String body;
+	
+	private String device;
+	
+	private long timestamp;
+	
+	public Tweet(String tweetId, String body, String device) {
+		this.tweetId = tweetId;
+		this.body = body;
+		this.device = device;
+	}
+	
+	public Tweet() {
+		
+	}
 
-@Entity
-@ColumnFamily(family = "Tweet", keyspace = "Examples")
-public class Tweet implements Serializable
-{
-    private static final long serialVersionUID = 1L;
+	/**
+	 * @return the tweetId
+	 */
+	public String getTweetId() {
+		return tweetId;
+	}
 
-    @Id
-    private String tweetId;
+	/**
+	 * @param tweetId the tweetId to set
+	 */
+	public void setTweetId(String tweetId) {
+		this.tweetId = tweetId;
+	}
 
-    @Column(name = "userid")
-    private String userId;
+	/**
+	 * @return the body
+	 */
+	public String getBody() {
+		return body;
+	}
 
-    @Column(name = "tweetbody")
-    private String body;
+	/**
+	 * @param body the body to set
+	 */
+	public void setBody(String body) {
+		this.body = body;
+	}
 
-    @Column(name = "tstamp")
-    private String tweetTimeStamp;
+	/**
+	 * @return the device
+	 */
+	public String getDevice() {
+		return device;
+	}
 
-    
-    /**
-     * 
-     */
-    public Tweet()
-    {
-    }
+	/**
+	 * @param device the device to set
+	 */
+	public void setDevice(String device) {
+		this.device = device;
+	}
 
-    /**
-     * @param tweetId
-     * @param userId
-     * @param body
-     */
-    public Tweet(String userId, String body)
-    {
-        this.userId = userId;
-        this.body = body;
-        tweetTimeStamp = ((Long)(new java.util.Date().getTime())).toString();
-        this.tweetId = userId + tweetTimeStamp;
-    }
+	/**
+	 * @return the timestamp
+	 */
+	public long getTimestamp() {
+		return timestamp;
+	}
 
-    /**
-     * @return the tweetId
-     */
-    public String getTweetId()
-    {
-        return tweetId;
-    }
-
-    /**
-     * @return the userId
-     */
-    public String getUserId()
-    {
-        return userId;
-    }
-
-    /**
-     * @return the body
-     */
-    public String getBody()
-    {
-        return body;
-    }
-
-    /**
-     * @return the tweetTimeStamp
-     */
-    public String getTweetTimeStamp()
-    {
-        return tweetTimeStamp ;
-    }
-
-    /**
-     * @param tweetId the tweetId to set
-     */
-    public void setTweetId(String tweetId)
-    {
-        this.tweetId = tweetId;
-    }
-
-    /**
-     * @param userId the userId to set
-     */
-    public void setUserId(String userId)
-    {
-        this.userId = userId;
-    }
-
-    /**
-     * @param body the body to set
-     */
-    public void setBody(String body)
-    {
-        this.body = body;
-    }
-
-    /**
-     * @param tweetTimeStamp the tweetTimeStamp to set
-     */
-    public void setTweetTimeStamp(String tweetTimeStamp)
-    {
-        this.tweetTimeStamp = tweetTimeStamp;
-    }
-
+	/**
+	 * @param timestamp the timestamp to set
+	 */
+	public void setTimestamp(long timestamp) {
+		this.timestamp = timestamp;
+	}
+	
 }

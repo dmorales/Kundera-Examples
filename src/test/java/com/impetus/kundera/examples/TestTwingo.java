@@ -15,11 +15,14 @@
  */
 package com.impetus.kundera.examples;
 
+import java.util.List;
+
 import junit.framework.TestCase;
 
 import com.impetus.kundera.examples.dao.Twingo;
 import com.impetus.kundera.examples.dao.Twitter;
 import com.impetus.kundera.examples.entities.Preference;
+import com.impetus.kundera.examples.entities.Tweet;
 
 /**
  * Test case for MongoDB
@@ -52,7 +55,7 @@ public class TestTwingo extends TestCase
         twitter.close();
     }
 
-    public void addUser()
+    public void addUsers()
     {
         twitter.addUser(userId1, "Amresh", "password1", "married");
         twitter.addUser(userId2, "Saurabh", "password2", "single");
@@ -72,35 +75,40 @@ public class TestTwingo extends TestCase
         twitter.addExternalLink(userId2, "Yahoo", "http://yahoo.com/profiles/itsmeamry");        
     }
     
-    public void addTweet() {
+    public void addTweets() {
         twitter.addTweet(userId1, "Here is my first tweet", "Web");
         twitter.addTweet(userId1, "Here is my second tweet", "Mobile");
         
         twitter.addTweet(userId2, "Here is my first tweet2", "Phone");
         twitter.addTweet(userId2, "Here is my second tweet2", "text");
     }
-
-    /*
-     * public void follow() { User user1 =
-     * twitter.getUserByName(this.user1.getUserName()); User user2 =
-     * twitter.getUserByName(this.user2.getUserName());
-     * 
-     * twitter.startFollowing(user2.getId(), user1.getId()); }
-     * 
-     * public void tweet() { User user1 =
-     * twitter.getUserByName(this.user1.getUserName());
-     * twitter.addTweet(user1.getId(), "Kundera is so much fun!",
-     * user1.getUserName()); }
-     */
+    
+    public void user1FollowsUser2() {
+        twitter.startFollowing(userId1, userId2);
+    }
+    
+    public void user1AddsUser2AsFollower() {
+        twitter.addFollower(userId1, userId2);
+    }
+    
+    public void getAllTweets() {
+        List<Tweet> tweetsUser1 = twitter.getAllTweets(userId1);
+        List<Tweet> tweetsUser2 = twitter.getAllTweets(userId2);
+        
+        System.out.println(tweetsUser1);
+        System.out.println(tweetsUser2);
+        
+    }
+   
     public void test()
     {
-        //addUser();
+        //addUsers();
         //savePreference();
         //addExternalLinks();
-        //addTweet();
-       
-        // follow();
-        // tweet();
+        //addTweets();
+        //user1FollowsUser2();
+        getAllTweets();
+        
     }
 
 }

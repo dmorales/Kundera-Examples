@@ -10,7 +10,7 @@ import javax.persistence.EntityManager;
  * 
  * @author impetus
  */
-public class TwiBase extends SuperDao implements Twitter
+public class TwiBase extends SuperDao 
 {
     private EntityManager em;
 
@@ -66,14 +66,14 @@ public class TwiBase extends SuperDao implements Twitter
 
     }
 
-    @Override
+    
     public void addTweet(String userid, String tweetmsg, String userName)
     {
         // TODO Auto-generated method stub
         
     }
     
-    @Override
+
 	public void close() {
 		if(em != null) {
 			em.close();

@@ -29,16 +29,14 @@ import junit.framework.TestCase;
 public class TestMongoDB extends TestCase {
 	User user1;
 	User user2;
-	Twingo twitter;
+	Twitter twitter;
 	
 	@Override
 	protected void setUp() throws Exception {		
 		super.setUp();
 		
-		twitter = new Twingo("twingo");
-		
-		user1 = new User("user1", "password1");	
-		user2 = new User("user2", "password2");		
+		twitter = new Twingo("twingo");	
+			
 	}
 	
 	@Override
@@ -49,10 +47,10 @@ public class TestMongoDB extends TestCase {
 	
 	
 	public void addUser() {
-		twitter.addUser(user1.getUserName(), user1.getPassword());
-		twitter.addUser(user2.getUserName(), user2.getPassword());
+		twitter.addUser("0001", "Amresh", "password1", "married");
+		twitter.addUser("0002", "Saurabh", "password2", "single");
 	}
-	
+	/*
 	public void follow() {
 		User user1 = twitter.getUserByName(this.user1.getUserName());
 		User user2 = twitter.getUserByName(this.user2.getUserName());
@@ -64,11 +62,11 @@ public class TestMongoDB extends TestCase {
 		User user1 = twitter.getUserByName(this.user1.getUserName());
 		twitter.addTweet(user1.getId(), "Kundera is so much fun!", user1.getUserName());
 	}
-	
+	*/
 	public void test() {
-		//addUser();
+		addUser();
 		//follow();
-		tweet();
+		//tweet();
 	}
 	
 

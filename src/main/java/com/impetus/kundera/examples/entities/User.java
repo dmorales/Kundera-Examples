@@ -18,165 +18,188 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-
 /**
  * @author impetus
  * 
  */
 @Entity
-@Table(name="users", schema="Kundera-Examples")
-public class User implements Serializable {
+@Table(name = "users", schema = "Kundera-Examples")
+public class User implements Serializable
+{
 
     @Id
     private String userId;
+
+    // Embedded object, will persist co-located
+    @Embedded
+    private PersonalDetail personalDetail;
+
+    // Embedded collection, will persist co-located
+    @Embedded
+    private List<Tweet> tweets;
+
+    // Embedded collection, will persist co-located
+    @Embedded
+    private List<User> friends; // List of users whom I follow
+
+    // Embedded collection, will persist co-located
+    @Embedded
+    private List<User> followers; // List of users who are following me
+
+    // One-to-one, will be persisted separately
+    @OneToOne(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
+    private Preference preference;
+
+    // One to many, will be persisted separately
+    @OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
+    private Set<ExternalLink> externalLinks;
+
+    public User()
+    {
+
+    }
     
-    //Embedded object, will persist co-located
-	@Embedded
-	private PersonalDetail personalDetail;
-	
-	//Embedded collection, will persist co-located
-	@Embedded
-	private List<Tweet> tweets;	
-	
-	//Embedded collection, will persist co-located
-	@Embedded
-	private List<User> friends;	//List of users whom I follow
-	
-	//Embedded collection, will persist co-located
-	@Embedded
-	private List<User> followers;	//List of users who are following me
-	
-	//One-to-one, will be persisted separately
-	@OneToOne(cascade={CascadeType.ALL}, fetch=FetchType.EAGER)
-	private Preference preference;	
-	
-	//One to many, will be persisted separately
-	@OneToMany (cascade={CascadeType.ALL}, fetch=FetchType.EAGER)	
-	private Set<ExternalLink> externalLinks;	
-	
-    
-    public User() {
-    	
+    public User(String userId, String name, String password, String relationshipStatus) {
+        PersonalDetail pd = new PersonalDetail(name, password, relationshipStatus);        
+        setUserId(userId);
+        setPersonalDetail(pd);        
     }
 
-	/**
-	 * @return the userId
-	 */
-	public String getUserId() {
-		return userId;
-	}
+    /**
+     * @return the userId
+     */
+    public String getUserId()
+    {
+        return userId;
+    }
 
+    /**
+     * @param userId
+     *            the userId to set
+     */
+    public void setUserId(String userId)
+    {
+        this.userId = userId;
+    }
 
-	/**
-	 * @param userId the userId to set
-	 */
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
+    /**
+     * @return the personalDetail
+     */
+    public PersonalDetail getPersonalDetail()
+    {
+        return personalDetail;
+    }
 
+    /**
+     * @param personalDetail
+     *            the personalDetail to set
+     */
+    public void setPersonalDetail(PersonalDetail personalDetail)
+    {
+        this.personalDetail = personalDetail;
+    }
 
-	/**
-	 * @return the personalDetail
-	 */
-	public PersonalDetail getPersonalDetail() {
-		return personalDetail;
-	}
+    /**
+     * @return the tweets
+     */
+    public List<Tweet> getTweets()
+    {
+        return tweets;
+    }
 
+    /**
+     * @param tweets
+     *            the tweets to set
+     */
+    public void addTweet(Tweet tweet)
+    {
+        if (this.tweets == null || this.tweets.isEmpty())
+        {
+            this.tweets = new ArrayList<Tweet>();
+        }
+        this.tweets.add(tweet);
+    }
 
-	/**
-	 * @param personalDetail the personalDetail to set
-	 */
-	public void setPersonalDetail(PersonalDetail personalDetail) {
-		this.personalDetail = personalDetail;
-	}
+    /**
+     * @return the preference
+     */
+    public Preference getPreference()
+    {
+        return preference;
+    }
 
+    /**
+     * @param preference
+     *            the preference to set
+     */
+    public void setPreference(Preference preference)
+    {
+        this.preference = preference;
+    }
 
-	/**
-	 * @return the tweets
-	 */
-	public List<Tweet> getTweets() {
-		return tweets;
-	}
+    /**
+     * @return the externalLinks
+     */
+    public Set<ExternalLink> getExternalLinks()
+    {
+        return externalLinks;
+    }
 
+    /**
+     * @param imDetails
+     *            the imDetails to set
+     */
+    public void addExternalLink(ExternalLink externalLink)
+    {
+        if (this.externalLinks == null || this.externalLinks.isEmpty())
+        {
+            this.externalLinks = new HashSet<ExternalLink>();
+        }
 
-	/**
-	 * @param tweets the tweets to set
-	 */
-	public void addTweet(Tweet tweet) {
-		if(this.tweets == null || this.tweets.isEmpty()) {
-			this.tweets = new ArrayList<Tweet>();
-		}
-		this.tweets.add(tweet);
-	}	
+        this.externalLinks.add(externalLink);
+    }
 
-	/**
-	 * @return the preference
-	 */
-	public Preference getPreference() {
-		return preference;
-	}
+    /**
+     * @return the friends
+     */
+    public List<User> getFriends()
+    {
+        return friends;
+    }
 
+    /**
+     * @param friends
+     *            the friends to set
+     */
+    public void addFriend(User friend)
+    {
+        if (this.friends == null || this.friends.isEmpty())
+        {
+            this.friends = new ArrayList<User>();
+        }
+        this.friends.add(friend);
+    }
 
-	/**
-	 * @param preference the preference to set
-	 */
-	public void setPreference(Preference preference) {
-		this.preference = preference;
-	}
+    /**
+     * @return the followers
+     */
+    public List<User> getFollowers()
+    {
+        return followers;
+    }
 
+    /**
+     * @param followers
+     *            the followers to set
+     */
+    public void addFollower(User follower)
+    {
+        if (this.followers == null || this.followers.isEmpty())
+        {
+            this.followers = new ArrayList<User>();
+        }
 
-	/**
-	 * @return the externalLinks
-	 */
-	public Set<ExternalLink> getExternalLinks() {
-		return externalLinks;
-	}
-
-
-	/**
-	 * @param imDetails the imDetails to set
-	 */
-	public void addExternalLink(ExternalLink externalLink) {
-		if(this.externalLinks == null || this.externalLinks.isEmpty()) {
-			this.externalLinks = new HashSet<ExternalLink>();
-		}
-		
-		this.externalLinks.add(externalLink);		
-	}
-
-	/**
-	 * @return the friends
-	 */
-	public List<User> getFriends() {
-		return friends;
-	}
-
-	/**
-	 * @param friends the friends to set
-	 */
-	public void addFriend(User friend) {
-		if(this.friends == null || this.friends.isEmpty()) {
-			this.friends = new ArrayList<User>();
-		}		
-		this.friends.add(friend);
-	}
-
-	/**
-	 * @return the followers
-	 */
-	public List<User> getFollowers() {
-		return followers;
-	}
-
-	/**
-	 * @param followers the followers to set
-	 */
-	public void addFollower(User follower) {
-		if(this.followers == null || this.followers.isEmpty()) {
-			this.followers = new ArrayList<User>();
-		}
-		
-		this.followers.add(follower);
-	}	
+        this.followers.add(follower);
+    }
 
 }

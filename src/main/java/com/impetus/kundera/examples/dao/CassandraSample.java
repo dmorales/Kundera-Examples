@@ -1,28 +1,28 @@
 /**
  * 
- */
+ *//*
 package com.impetus.kundera.examples.dao;
 
 import org.apache.log4j.Logger;
 
 import com.impetus.kundera.examples.entities.User;
 
-/**
+*//**
  * The Class CassandraSample.
  * 
  * @author impetus
- */
+ *//*
 public class CassandraSample
 {
 
     private static final Logger logger = Logger.getLogger(CassandraSample.class);
 
-    /**
+    *//**
      * The main method.
      * 
      * @param args
      *            the arguments
-     */
+     *//*
     public static void main(String[] args)
     {
         Twissandra twissandra = new Twissandra();
@@ -37,12 +37,12 @@ public class CassandraSample
         System.exit(0);
     }
 
-    /**
+    *//**
      * Adds the user.
      * 
      * @param twissandra
      *            the twissandra
-     */
+     *//*
     private static void addUser(Twissandra twissandra)
     {
         twissandra.addUser("imp", "imp");
@@ -50,19 +50,19 @@ public class CassandraSample
 
     }
 
-    /**
+    *//**
      * Search and follow.
      * 
      * @param twissandra
      *            the twissandra
-     */
+     *//*
     private static void searchAndFollow(Twissandra twissandra)
     {
         User user = twissandra.findAUser("imp");
         if (user != null)
         {
-            twissandra.startFollowing(user.getId(), "f_imp");
-            twissandra.startFollowing(user.getId(), "f_imp2");
+            //twissandra.startFollowing(user.getId(), "f_imp");
+            //twissandra.startFollowing(user.getId(), "f_imp2");
         }
         else
         {
@@ -71,15 +71,15 @@ public class CassandraSample
         twissandra.close();
     }
 
-    /**
+    *//**
      * Find a friend.
-     */
+     *//*
     private static void findAFriend(Twissandra twissandra)
     {
         User user = twissandra.findAUser("imp");
         if (user != null)
         {
-            twissandra.findAFriend(user.getId(), user.getUserName());
+           // twissandra.findAFriend(user.getId(), user.getUserName());
         }
         else
         {
@@ -88,15 +88,15 @@ public class CassandraSample
         twissandra.close();
     }
 
-    /**
+    *//**
      * Find a friend.
-     */
+     *//*
     private static void findFollowers(Twissandra twissandra)
     {
         User user = twissandra.findAUser("imp");
         if (user != null)
         {
-            twissandra.findFollowers(user.getId(), user.getUserName());
+            //twissandra.findFollowers(user.getId(), user.getUserName());
         }
         else
         {
@@ -105,15 +105,15 @@ public class CassandraSample
         twissandra.close();
     }
 
-    /**
+    *//**
      * Tweet.
-     */
+     *//*
     private static void tweet(Twissandra twissandra, String tweetMsg)
     {
         User user = twissandra.findAUser("imp");
         if (user != null)
         {
-            twissandra.addTweet(user.getUserName(), user.getId(), tweetMsg);
+            //twissandra.addTweet(user.getUserName(), user.getId(), tweetMsg);
         }
         else
         {
@@ -122,16 +122,16 @@ public class CassandraSample
         twissandra.close();
     }
 
-    /**
+    *//**
      * Find tweets.
-     */
+     *//*
     private static void findTweets(Twissandra twissandra)
     {
         User user = twissandra.findAUser("imp");
 
         if (user != null)
         {
-            twissandra.findTweets(user.getUserName(), user.getId());
+            //twissandra.findTweets(user.getUserName(), user.getId());
         }
         else
         {
@@ -140,16 +140,16 @@ public class CassandraSample
         twissandra.close();
     }
 
-    /**
+    *//**
      * Friend tweets.
-     */
+     *//*
     private static void findFriendTweets(Twissandra twissandra)
     {
         User user = twissandra.findAUser("imp");
 
         if (user != null)
         {
-            twissandra.findTweetsForFriends(user.getUserName(), user.getId());
+           // twissandra.findTweetsForFriends(user.getUserName(), user.getId());
         }
         else
         {
@@ -157,4 +157,4 @@ public class CassandraSample
         }
         twissandra.close();
     }
-}
+}*/

@@ -15,19 +15,14 @@
  */
 package com.impetus.kundera.examples.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 
-import com.impetus.kundera.examples.entities.Followers;
-import com.impetus.kundera.examples.entities.Friends;
-import com.impetus.kundera.examples.entities.Timeline;
+import com.impetus.kundera.examples.entities.ExternalLink;
+import com.impetus.kundera.examples.entities.Preference;
 import com.impetus.kundera.examples.entities.Tweet;
 import com.impetus.kundera.examples.entities.User;
-import com.impetus.kundera.examples.entities.Userline;
-import com.impetus.kundera.examples.utils.ExampleUtils;
 
 /**
  * Data access object class for mongo implementation of twitter.
@@ -61,17 +56,53 @@ public class Twingo extends SuperDao implements Twitter
         }
     }
 
+   
     @Override
-    public void addUser(String username, String password)
+    public void addUser(String userId, String name, String password, String relationshipStatus)
     {
-        // Persist User Entity
-        String userId = ExampleUtils.getUniqueId();
-        User user = new User(username, password);
-        user.setId(userId);
-        em.persist(user);
+        User user = new User(userId, name, password, relationshipStatus);
+        em.persist(user);        
     }
 
     @Override
+    public void savePreference(String userId, Preference preference)
+    {
+        
+    }
+
+    @Override
+    public void addExternalLink(String userId, ExternalLink externalLink)
+    {
+       
+    }
+
+    @Override
+    public void addFollower(String userId, String followerUserId)
+    {
+       
+    }
+
+    @Override
+    public void addTweet(String userId, String tweetBody, String device)
+    {
+        
+    }
+
+    @Override
+    public void startFollowing(String userId, String friendUserId)
+    {
+        
+    }
+
+    @Override
+    public List<Tweet> getAllTweets(String userId)
+    {
+        return null;
+    }
+    
+    
+
+   /* @Override
     public void startFollowing(String thisUserId, String friendUserId)
     {
         Friends friend = new Friends(thisUserId, friendUserId);
@@ -170,6 +201,10 @@ public class Twingo extends SuperDao implements Twitter
         {
             return users.get(0);
         }
-    }
+    }*/
+
+    
+    
+    
 
 }

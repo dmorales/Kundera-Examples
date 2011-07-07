@@ -17,72 +17,102 @@ package com.impetus.kundera.examples.entities;
 
 import javax.persistence.Embeddable;
 
+import com.impetus.kundera.examples.utils.ExampleUtils;
+
 /**
  * Entity class for user's personal details
+ * 
  * @author amresh.singh
  */
 
 @Embeddable
-public class PersonalDetail {	
-	private String personalDetailId;	
-	private String name;
-	private String password;	
-	private String relationshipStatus;	
+public class PersonalDetail
+{
+    private String personalDetailId;
 
-	/**
-	 * @return the personalDetailId
-	 */
-	public String getPersonalDetailId() {
-		return personalDetailId;
-	}
+    private String name;
 
-	/**
-	 * @param personalDetailId the personalDetailId to set
-	 */
-	public void setPersonalDetailId(String personalDetailId) {
-		this.personalDetailId = personalDetailId;
-	}
+    private String password;
 
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}
+    private String relationshipStatus;
+    
+    public PersonalDetail() {
+        
+    }
+    
+    public PersonalDetail(String name, String password, String relationshipStatus) {
+        setPersonalDetailId(ExampleUtils.getUniqueId());
+        setName(name);
+        setPassword(password);
+        setRelationshipStatus(relationshipStatus);       
+    }
 
-	/**
-	 * @param name the name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}	
+    /**
+     * @return the personalDetailId
+     */
+    public String getPersonalDetailId()
+    {
+        return personalDetailId;
+    }
 
-	/**
-	 * @return the password
-	 */
-	public String getPassword() {
-		return password;
-	}
+    /**
+     * @param personalDetailId
+     *            the personalDetailId to set
+     */
+    public void setPersonalDetailId(String personalDetailId)
+    {
+        this.personalDetailId = personalDetailId;
+    }
 
-	/**
-	 * @param password the password to set
-	 */
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    /**
+     * @return the name
+     */
+    public String getName()
+    {
+        return name;
+    }
 
-	/**
-	 * @return the relationshipStatus
-	 */
-	public String getRelationshipStatus() {
-		return relationshipStatus;
-	}
+    /**
+     * @param name
+     *            the name to set
+     */
+    public void setName(String name)
+    {
+        this.name = name;
+    }
 
-	/**
-	 * @param relationshipStatus the relationshipStatus to set
-	 */
-	public void setRelationshipStatus(String relationshipStatus) {
-		this.relationshipStatus = relationshipStatus;
-	}	
+    /**
+     * @return the password
+     */
+    public String getPassword()
+    {
+        return password;
+    }
+
+    /**
+     * @param password
+     *            the password to set
+     */
+    public void setPassword(String password)
+    {
+        this.password = password;
+    }
+
+    /**
+     * @return the relationshipStatus
+     */
+    public String getRelationshipStatus()
+    {
+        return relationshipStatus;
+    }
+
+    /**
+     * @param relationshipStatus
+     *            the relationshipStatus to set
+     */
+    public void setRelationshipStatus(String relationshipStatus)
+    {
+        this.relationshipStatus = relationshipStatus;
+    }
 
 }

@@ -1,6 +1,6 @@
 /**
  * 
- */
+ *//*
 package com.impetus.kundera.examples.dao;
 
 
@@ -51,33 +51,33 @@ import com.impetus.kundera.examples.entities.User;
 import com.impetus.kundera.examples.entities.Userline;
 
 
-/**
+*//**
  * The Class Twissandra.
  *
  * @author impetus
- */
+ *//*
 
 //TODO move all implementations to  declaration in interface.
 public class Twissandra extends SuperDao implements Twitter
 {
 
-    /** The embedded server cassandra. */
+    *//** The embedded server cassandra. *//*
     private static EmbeddedCassandraService cassandra;
 
-    /** The eservice. */
+    *//** The eservice. *//*
     static ExecutorService                    eservice;
 
-    /** The em. */
+    *//** The em. *//*
     private EntityManager em;
     
-    /** The client. */
+    *//** The client. *//*
     private Cassandra.Client client;
     
     private static final Logger logger =  Logger.getLogger(Twissandra.class);
     
-    /**
+    *//**
      * Instantiates a new twissandra.
-     */
+     *//*
     public Twissandra()
     {
         try
@@ -102,9 +102,9 @@ public class Twissandra extends SuperDao implements Twitter
         }
     }
     
-    /**
+    *//**
      * Start solandra.
-     */
+     *//*
     private void startSolandra() {
 
 
@@ -126,14 +126,14 @@ public class Twissandra extends SuperDao implements Twitter
         
     }
     
-    /**
+    *//**
      * Load data.
      *
      * @throws ConfigurationException the configuration exception
      * @throws TException the t exception
      * @throws NotFoundException the not found exception
      * @throws InvalidRequestException the invalid request exception
-     */
+     *//*
     private  void loadData() throws org.apache.cassandra.config.ConfigurationException, TException, NotFoundException, InvalidRequestException 
     {
        
@@ -176,16 +176,16 @@ public class Twissandra extends SuperDao implements Twitter
         DatabaseDescriptor.setTableDefinition(metadata, DatabaseDescriptor.getDefsVersion());
     }
     
-    /**
+    *//**
      * Standard cfmd.
      *
      * @param ksName the ks name
      * @param cfName the cf name
      * @return the cF meta data
-     */
+     *//*
     private static CFMetaData standardCFMD(String ksName, String cfName)
     {
-        /**
+        *//**
          * String tableName, String cfName, ColumnFamilyType cfType,
          *  AbstractType comparator, AbstractType subcolumnComparator,
          *  String comment, double rowCacheSize, double keyCacheSize, 
@@ -193,18 +193,18 @@ public class Twissandra extends SuperDao implements Twitter
          *  int minCompactionThreshold, int maxCompactionThreshold, int rowCacheSavePeriodInSeconds, 
          *  int keyCacheSavePeriodInSeconds, int memTime, Integer memSize, Double memOps, 
          *  Map<ByteBuffer, ColumnDefinition> column_metadata
-         */
+         *//*
         return new CFMetaData(ksName, cfName, ColumnFamilyType.Standard, UTF8Type.instance, null,"colfamily",
                               Double.valueOf("0"),Double.valueOf("0"),Double.valueOf("0"),0,
                               UTF8Type.instance,0,0,0,0,0,Integer.valueOf(0),Double.valueOf("0"),new HashMap<ByteBuffer, ColumnDefinition>());
     }
     
-    /**
+    *//**
      * Start cassandra server.
      *
      * @throws IOException Signals that an I/O exception has occurred.
      * @throws ConfigurationException the configuration exception
-     */
+     *//*
     private static void startCassandraServer() throws IOException, ConfigurationException
     {
     
@@ -215,9 +215,9 @@ public class Twissandra extends SuperDao implements Twitter
         }
     }
 
-    /**
+    *//**
      * Inits the client.
-     */
+     *//*
     private void initClient()
     {
         TSocket socket = new TSocket("127.0.0.1", 9165);
@@ -243,11 +243,11 @@ public class Twissandra extends SuperDao implements Twitter
     
     }
    
-    /**
+    *//**
      * Check if server running.
      *
      * @return true, if successful
-     */
+     *//*
     private static boolean checkIfServerRunning()
     {
         try
@@ -265,9 +265,9 @@ public class Twissandra extends SuperDao implements Twitter
         }
     }
     
-    /* (non-Javadoc)
+     (non-Javadoc)
      * @see com.impetus.kundera.examples.dao.Twitter#addUser(java.lang.String, java.lang.String)
-     */
+     
     public void addUser(String username, String password)
     {
         em = init("cassandra");
@@ -279,9 +279,9 @@ public class Twissandra extends SuperDao implements Twitter
     
 
     
-    /* (non-Javadoc)
+     (non-Javadoc)
      * @see com.impetus.kundera.examples.dao.Twitter#tweet(java.lang.String, java.lang.String)
-     */
+     
     public void addTweet(String userName, String userId, String tweetMsg)
     {
         em = init("cassandra");
@@ -307,9 +307,9 @@ public class Twissandra extends SuperDao implements Twitter
     }
 
     
-    /* (non-Javadoc)
+     (non-Javadoc)
      * @see com.impetus.kundera.examples.dao.Twitter#follow(java.lang.String, java.lang.String)
-     */
+     
     public void startFollowing(String userid, String friend)
     {
         em = init("cassandra");
@@ -319,12 +319,12 @@ public class Twissandra extends SuperDao implements Twitter
         em.persist(follower);
     }
     
-    /**
+    *//**
      * Find a friend.
      *
      * @param userId the user id
      * @param userName the user name
-     */
+     *//*
     public void findAFriend(String userId, String userName)
     {
         em = init("cassandra");
@@ -342,12 +342,12 @@ public class Twissandra extends SuperDao implements Twitter
         
     }
     
-    /**
+    *//**
      * Find followers.
      *
      * @param userId the user id
      * @param userName the user name
-     */
+     *//*
     public void findFollowers(String userId, String userName)
     {
         em = init("cassandra");
@@ -361,12 +361,12 @@ public class Twissandra extends SuperDao implements Twitter
 
     
     
-    /**
+    *//**
      * Find a user.
      *
      * @param userName the user name
      * @return the user
-     */
+     *//*
     public User findAUser(String userName)
     {
         em = init("cassandra");
@@ -378,12 +378,12 @@ public class Twissandra extends SuperDao implements Twitter
         
     }
 
-    /**
+    *//**
      * Find tweets.
      *
      * @param userName the user name
      * @param userId the user id
-     */
+     *//*
     public void findTweets(String userName, String userId)
     {
         em = init("cassandra");
@@ -398,12 +398,12 @@ public class Twissandra extends SuperDao implements Twitter
       }
     }
 
-    /**
+    *//**
      * Find tweets for friends.
      *
      * @param userName the user name
      * @param userId the user id
-     */
+     *//*
     public void findTweetsForFriends(String userName, String userId)
     {
         em = init("cassandra");
@@ -423,13 +423,13 @@ public class Twissandra extends SuperDao implements Twitter
       }
     }
     
-    /**
+    *//**
      * Gets the followers.
      *
      * @param userId the user id
      * @param userName the user name
      * @return the followers
-     */
+     *//*
     private List<Followers> getFollowers(String userId, String userName)
     {
         String sql = "select a from Followers a where a.userId  =:userId";   
@@ -440,9 +440,9 @@ public class Twissandra extends SuperDao implements Twitter
     }
 
 	
-	/* (non-Javadoc)
+	 (non-Javadoc)
 	 * @see com.impetus.kundera.examples.dao.Twitter#close()
-	 */
+	 
 	@Override
 	public void close() {
 		if(em != null) {
@@ -452,3 +452,4 @@ public class Twissandra extends SuperDao implements Twitter
 	}
    
 }
+*/

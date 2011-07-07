@@ -70,6 +70,14 @@ public class Twingo extends SuperDao implements Twitter
         user.setPreference(preference);
         em.persist(user);
     }
+    
+    @Override
+    public void addTweet(String userId, String tweetBody, String device)
+    {
+        User user = em.find(User.class, userId);
+        user.addTweet(new Tweet(tweetBody, device));
+        em.persist(user);
+    }
 
     @Override
     public void addExternalLink(String userId, ExternalLink externalLink)
@@ -83,11 +91,7 @@ public class Twingo extends SuperDao implements Twitter
 
     }
 
-    @Override
-    public void addTweet(String userId, String tweetBody, String device)
-    {
-
-    }
+   
 
     @Override
     public void startFollowing(String userId, String friendUserId)

@@ -17,6 +17,8 @@ package com.impetus.kundera.examples.entities;
 
 import javax.persistence.Embeddable;
 
+import com.impetus.kundera.examples.utils.ExampleUtils;
+
 /**
  * Class for Tweets
  * 
@@ -35,11 +37,12 @@ public class Tweet
 
     private long timestamp;
 
-    public Tweet(String tweetId, String body, String device)
+    public Tweet(String body, String device)
     {
-        this.tweetId = tweetId;
+        this.tweetId = ExampleUtils.getUniqueId();
         this.body = body;
         this.device = device;
+        this.timestamp = ExampleUtils.getCurrentTimestamp();
     }
 
     public Tweet()

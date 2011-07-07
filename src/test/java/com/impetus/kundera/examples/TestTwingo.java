@@ -60,8 +60,16 @@ public class TestTwingo extends TestCase
 
     public void savePreference()
     {
-        twitter.savePreference(userId1, new Preference("Motif", "1"));
-        twitter.savePreference(userId2, new Preference("High Contrast", "2"));
+        twitter.savePreference(userId1, new Preference("Motif", "2"));
+        twitter.savePreference(userId2, new Preference("High Contrast", "3"));
+    }
+    
+    public void addTweet() {
+        twitter.addTweet(userId1, "Here is my first tweet", "Web");
+        twitter.addTweet(userId1, "Here is my second tweet", "Mobile");
+        
+        twitter.addTweet(userId2, "Here is my first tweet2", "Phone");
+        twitter.addTweet(userId2, "Here is my second tweet2", "text");
     }
 
     /*
@@ -78,7 +86,9 @@ public class TestTwingo extends TestCase
      */
     public void test()
     {
-        addUser();
+        //addUser();
+        //savePreference();
+        addTweet();
         // follow();
         // tweet();
     }

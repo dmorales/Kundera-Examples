@@ -22,72 +22,84 @@ import javax.persistence.Table;
 
 /**
  * Entity class for user's External link details
+ * 
  * @author amresh.singh
  */
 
 @Entity
-@Table(name="externalLinks", schema="Kundera-Examples")
-public class ExternalLink {
-	
-	@Id
-	private String imDetailId;
-	
-	@Column(name="im_type")
-	private String imType;
-	
-	@Column(name="im_detail")
-	private String imDetail;
-	
-	public ExternalLink() {
-		
-	}
-	
-	public ExternalLink(String id, String type, String detail) {
-		this.imDetailId = id;
-		this.imType = type;
-		this.imDetail = detail;
-	}
+@Table(name = "externalLinks", schema = "Kundera-Examples")
+public class ExternalLink
+{
 
-	/**
-	 * @return the imDetailId
-	 */
-	public String getImDetailId() {
-		return imDetailId;
-	}
+    @Id
+    private String extLinkId;
 
-	/**
-	 * @param imDetailId the imDetailId to set
-	 */
-	public void setImDetailId(String imDetailId) {
-		this.imDetailId = imDetailId;
-	}
+    @Column(name = "link_type")
+    private String linkType;
 
-	/**
-	 * @return the imType
-	 */
-	public String getImType() {
-		return imType;
-	}
+    @Column(name = "link_address")
+    private String linkAddress;
 
-	/**
-	 * @param imType the imType to set
-	 */
-	public void setImType(String imType) {
-		this.imType = imType;
-	}
+    public ExternalLink()
+    {
 
-	/**
-	 * @return the imDetail
-	 */
-	public String getImDetail() {
-		return imDetail;
-	}
+    }
 
-	/**
-	 * @param imDetail the imDetail to set
-	 */
-	public void setImDetail(String imDetail) {
-		this.imDetail = imDetail;
-	}
-	
+    public ExternalLink(String id, String type, String address)
+    {
+        this.extLinkId = id;
+        this.linkType = type;
+        this.linkAddress = address;
+    }
+
+    /**
+     * @return the extLinkId
+     */
+    public String getExtLinkId()
+    {
+        return extLinkId;
+    }
+
+    /**
+     * @param extLinkId
+     *            the extLinkId to set
+     */
+    public void setExtLinkId(String extLinkId)
+    {
+        this.extLinkId = extLinkId;
+    }
+
+    /**
+     * @return the linkType
+     */
+    public String getLinkType()
+    {
+        return linkType;
+    }
+
+    /**
+     * @param linkType
+     *            the linkType to set
+     */
+    public void setLinkType(String linkType)
+    {
+        this.linkType = linkType;
+    }
+
+    /**
+     * @return the linkAddress
+     */
+    public String getLinkAddress()
+    {
+        return linkAddress;
+    }
+
+    /**
+     * @param linkAddress
+     *            the linkAddress to set
+     */
+    public void setLinkAddress(String linkAddress)
+    {
+        this.linkAddress = linkAddress;
+    }
 }

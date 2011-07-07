@@ -61,8 +61,8 @@ public class CassandraSample
         User user = twissandra.findAUser("imp");
         if (user != null)
         {
-            twissandra.follow(user.getId(), "f_imp");
-            twissandra.follow(user.getId(), "f_imp2");
+            twissandra.startFollowing(user.getId(), "f_imp");
+            twissandra.startFollowing(user.getId(), "f_imp2");
         }
         else
         {
@@ -113,7 +113,7 @@ public class CassandraSample
         User user = twissandra.findAUser("imp");
         if (user != null)
         {
-            twissandra.tweet(user.getUserName(), user.getId(), tweetMsg);
+            twissandra.addTweet(user.getUserName(), user.getId(), tweetMsg);
         }
         else
         {

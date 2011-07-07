@@ -61,13 +61,13 @@ public class TwiBase extends SuperDao implements Twitter
      * @see com.impetus.kundera.examples.dao.Twitter#follow(java.lang.String,
      * java.lang.String)
      */
-    public void follow(String userid, String friend)
+    public void startFollowing(String userid, String friend)
     {
 
     }
 
     @Override
-    public void tweet(String userid, String tweetmsg, String userName)
+    public void addTweet(String userid, String tweetmsg, String userName)
     {
         // TODO Auto-generated method stub
         

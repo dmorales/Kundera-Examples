@@ -282,7 +282,7 @@ public class Twissandra extends SuperDao implements Twitter
     /* (non-Javadoc)
      * @see com.impetus.kundera.examples.dao.Twitter#tweet(java.lang.String, java.lang.String)
      */
-    public void tweet(String userName, String userId, String tweetMsg)
+    public void addTweet(String userName, String userId, String tweetMsg)
     {
         em = init("cassandra");
         Tweet tweet = new Tweet(userId, tweetMsg);
@@ -310,7 +310,7 @@ public class Twissandra extends SuperDao implements Twitter
     /* (non-Javadoc)
      * @see com.impetus.kundera.examples.dao.Twitter#follow(java.lang.String, java.lang.String)
      */
-    public void follow(String userid, String friend)
+    public void startFollowing(String userid, String friend)
     {
         em = init("cassandra");
         Friends friends = new Friends(userid, friend);

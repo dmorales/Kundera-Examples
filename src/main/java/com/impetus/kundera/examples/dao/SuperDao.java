@@ -9,7 +9,7 @@ import com.impetus.kundera.loader.Configuration;
 
 /**
  * The Class SuperDao.
- *
+ * 
  * @author impetus
  */
 public class SuperDao
@@ -17,12 +17,14 @@ public class SuperDao
 
     /**
      * Inits the.
-     *
-     * @param persistenceUnitName the persistence unit name
+     * 
+     * @param persistenceUnitName
+     *            the persistence unit name
      * @return the entity manager
-     * @throws Exception the exception
+     * @throws Exception
+     *             the exception
      */
-    protected EntityManager init(String persistenceUnitName) 
+    protected EntityManager init(String persistenceUnitName)
     {
         Configuration conf = new Configuration();
         return conf.getEntityManager(persistenceUnitName);

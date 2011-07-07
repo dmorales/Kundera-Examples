@@ -20,19 +20,24 @@ import java.util.UUID;
 
 /**
  * Class for utility methods
+ * 
  * @author amresh.singh
  */
-public class ExampleUtils {
-	public static String getUniqueId() {
-		return UUID.randomUUID().toString();
-	}
-	
-	public static long getCurrentTimestamp() {
-		return new Date().getTime();
-	}
-	
-	public static void main(String[] args) {
-		System.out.println(getCurrentTimestamp());
-	}
-	
+public class ExampleUtils
+{
+    public static String getUniqueId()
+    {
+        return UUID.randomUUID().toString();
+    }
+
+    public static long getCurrentTimestamp()
+    {
+        return new Date().getTime();
+    }
+
+    public static void main(String[] args)
+    {
+        System.out.println(getCurrentTimestamp());
+    }
+
 }

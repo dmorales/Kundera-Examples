@@ -35,16 +35,18 @@ public class PersonalDetail
     private String password;
 
     private String relationshipStatus;
-    
-    public PersonalDetail() {
-        
+
+    public PersonalDetail()
+    {
+
     }
-    
-    public PersonalDetail(String name, String password, String relationshipStatus) {
+
+    public PersonalDetail(String name, String password, String relationshipStatus)
+    {
         setPersonalDetailId(ExampleUtils.getUniqueId());
         setName(name);
         setPassword(password);
-        setRelationshipStatus(relationshipStatus);       
+        setRelationshipStatus(relationshipStatus);
     }
 
     /**

@@ -56,42 +56,41 @@ public class Twingo extends SuperDao implements Twitter
         }
     }
 
-   
     @Override
     public void addUser(String userId, String name, String password, String relationshipStatus)
     {
         User user = new User(userId, name, password, relationshipStatus);
-        em.persist(user);        
+        em.persist(user);
     }
 
     @Override
     public void savePreference(String userId, Preference preference)
     {
-        
+
     }
 
     @Override
     public void addExternalLink(String userId, ExternalLink externalLink)
     {
-       
+
     }
 
     @Override
     public void addFollower(String userId, String followerUserId)
     {
-       
+
     }
 
     @Override
     public void addTweet(String userId, String tweetBody, String device)
     {
-        
+
     }
 
     @Override
     public void startFollowing(String userId, String friendUserId)
     {
-        
+
     }
 
     @Override
@@ -99,112 +98,74 @@ public class Twingo extends SuperDao implements Twitter
     {
         return null;
     }
-    
-    
 
-   /* @Override
-    public void startFollowing(String thisUserId, String friendUserId)
-    {
-        Friends friend = new Friends(thisUserId, friendUserId);
-        em.persist(friend);
-
-        Followers follower = new Followers(friendUserId, thisUserId);
-        em.persist(follower);
-    }
-
-    @Override
-    public void addTweet(String userid, String tweetmsg, String userName)
-    {
-        // Persist Tweet
-        Tweet tweet = new Tweet(userid, tweetmsg);
-        em.persist(tweet);
-
-        Userline userLine = new Userline(userid, tweet.getTweetId(), tweetmsg);
-        em.persist(userLine);
-
-        // Persist Time Line for this user
-        Timeline timeLine = new Timeline(userid, tweet.getTweetId(), tweetmsg);
-        em.persist(timeLine);
-
-        // Persist Time Line for all users who follow this one
-        String followerSql = "Select f from Followers f where f.userId =:userId";
-        Query q = em.createQuery(followerSql);
-        q.setParameter("userId", userid);
-        List<Followers> followers = q.getResultList();
-        for (Followers follower : followers)
-        {
-            timeLine = new Timeline(follower.getFriendId(), tweet.getTweetId(), tweetmsg);
-            em.persist(timeLine);
-
-        }
-
-    }
-
-    public Tweet getTweet(String tweetId)
-    {
-        Tweet tweet = em.find(Tweet.class, tweetId);
-        return tweet;
-    }
-
-    public List<Tweet> getAllTweets(String userId)
-    {
-        Query q = em.createQuery("Select ul from Userline ul where ul.userId =:userId");
-        q.setParameter("userId", userId);
-
-        List<Userline> userLines = q.getResultList();
-
-        List<Tweet> allTweets = new ArrayList<Tweet>();
-        if (userLines != null && !userLines.isEmpty())
-        {
-            for (Userline ul : userLines)
-            {
-                Tweet tweet = new Tweet();
-                tweet.setTweetId(ul.getTweetId());
-                tweet.setUserId(userId);
-                tweet.setBody(ul.getTweetBody());
-                tweet.setTweetTimeStamp(ul.getTimestamp());
-
-                allTweets.add(tweet);
-            }
-
-        }
-
-        return allTweets;
-    }
-
-    public List<Timeline> getTimeLine(String userId)
-    {
-        Query q = em.createQuery("Select tl from Timeline tl where tl.userId =:userId");
-        q.setParameter("userId", userId);
-
-        List<Timeline> timeLines = q.getResultList();
-
-        return timeLines;
-    }
-
-    public User getUserById(String userId)
-    {
-        return em.find(User.class, userId);
-    }
-
-    public User getUserByName(String userName)
-    {
-        Query q = em.createQuery("select u from User u where u.userName like :userName");
-        q.setParameter("userName", userName);
-
-        List<User> users = q.getResultList();
-        if (users == null || users.isEmpty())
-        {
-            return null;
-        }
-        else
-        {
-            return users.get(0);
-        }
-    }*/
-
-    
-    
-    
+    /*
+     * @Override public void startFollowing(String thisUserId, String
+     * friendUserId) { Friends friend = new Friends(thisUserId, friendUserId);
+     * em.persist(friend);
+     * 
+     * Followers follower = new Followers(friendUserId, thisUserId);
+     * em.persist(follower); }
+     * 
+     * @Override public void addTweet(String userid, String tweetmsg, String
+     * userName) { // Persist Tweet Tweet tweet = new Tweet(userid, tweetmsg);
+     * em.persist(tweet);
+     * 
+     * Userline userLine = new Userline(userid, tweet.getTweetId(), tweetmsg);
+     * em.persist(userLine);
+     * 
+     * // Persist Time Line for this user Timeline timeLine = new
+     * Timeline(userid, tweet.getTweetId(), tweetmsg); em.persist(timeLine);
+     * 
+     * // Persist Time Line for all users who follow this one String followerSql
+     * = "Select f from Followers f where f.userId =:userId"; Query q =
+     * em.createQuery(followerSql); q.setParameter("userId", userid);
+     * List<Followers> followers = q.getResultList(); for (Followers follower :
+     * followers) { timeLine = new Timeline(follower.getFriendId(),
+     * tweet.getTweetId(), tweetmsg); em.persist(timeLine);
+     * 
+     * }
+     * 
+     * }
+     * 
+     * public Tweet getTweet(String tweetId) { Tweet tweet =
+     * em.find(Tweet.class, tweetId); return tweet; }
+     * 
+     * public List<Tweet> getAllTweets(String userId) { Query q =
+     * em.createQuery("Select ul from Userline ul where ul.userId =:userId");
+     * q.setParameter("userId", userId);
+     * 
+     * List<Userline> userLines = q.getResultList();
+     * 
+     * List<Tweet> allTweets = new ArrayList<Tweet>(); if (userLines != null &&
+     * !userLines.isEmpty()) { for (Userline ul : userLines) { Tweet tweet = new
+     * Tweet(); tweet.setTweetId(ul.getTweetId()); tweet.setUserId(userId);
+     * tweet.setBody(ul.getTweetBody());
+     * tweet.setTweetTimeStamp(ul.getTimestamp());
+     * 
+     * allTweets.add(tweet); }
+     * 
+     * }
+     * 
+     * return allTweets; }
+     * 
+     * public List<Timeline> getTimeLine(String userId) { Query q =
+     * em.createQuery("Select tl from Timeline tl where tl.userId =:userId");
+     * q.setParameter("userId", userId);
+     * 
+     * List<Timeline> timeLines = q.getResultList();
+     * 
+     * return timeLines; }
+     * 
+     * public User getUserById(String userId) { return em.find(User.class,
+     * userId); }
+     * 
+     * public User getUserByName(String userName) { Query q =
+     * em.createQuery("select u from User u where u.userName like :userName");
+     * q.setParameter("userName", userName);
+     * 
+     * List<User> users = q.getResultList(); if (users == null ||
+     * users.isEmpty()) { return null; } else { return users.get(0); } }
+     */
 
 }

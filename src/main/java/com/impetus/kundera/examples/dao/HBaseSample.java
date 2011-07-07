@@ -5,7 +5,7 @@ package com.impetus.kundera.examples.dao;
 
 /**
  * @author impetus
- *
+ * 
  */
 public class HBaseSample
 {
@@ -17,7 +17,6 @@ public class HBaseSample
     {
         TwiBase twiBase = new TwiBase();
         twiBase.addUser("impetus", "impetus");
-
 
     }
 

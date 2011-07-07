@@ -58,11 +58,12 @@ public class User implements Serializable
     {
 
     }
-    
-    public User(String userId, String name, String password, String relationshipStatus) {
-        PersonalDetail pd = new PersonalDetail(name, password, relationshipStatus);        
+
+    public User(String userId, String name, String password, String relationshipStatus)
+    {
+        PersonalDetail pd = new PersonalDetail(name, password, relationshipStatus);
         setUserId(userId);
-        setPersonalDetail(pd);        
+        setPersonalDetail(pd);
     }
 
     /**

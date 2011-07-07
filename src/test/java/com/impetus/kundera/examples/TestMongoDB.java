@@ -15,7 +15,6 @@
  */
 package com.impetus.kundera.examples;
 
-
 import com.impetus.kundera.examples.dao.Twingo;
 import com.impetus.kundera.examples.dao.Twitter;
 import com.impetus.kundera.examples.entities.User;
@@ -24,50 +23,56 @@ import junit.framework.TestCase;
 
 /**
  * Test case for MongoDB
+ * 
  * @author amresh.singh
  */
-public class TestMongoDB extends TestCase {
-	User user1;
-	User user2;
-	Twitter twitter;
-	
-	@Override
-	protected void setUp() throws Exception {		
-		super.setUp();
-		
-		twitter = new Twingo("twingo");	
-			
-	}
-	
-	@Override
-	protected void tearDown() throws Exception {		
-		super.tearDown();
-		twitter.close();
-	}
-	
-	
-	public void addUser() {
-		twitter.addUser("0001", "Amresh", "password1", "married");
-		twitter.addUser("0002", "Saurabh", "password2", "single");
-	}
-	/*
-	public void follow() {
-		User user1 = twitter.getUserByName(this.user1.getUserName());
-		User user2 = twitter.getUserByName(this.user2.getUserName());
-		
-		twitter.startFollowing(user2.getId(), user1.getId());
-	}
-	
-	public void tweet() {
-		User user1 = twitter.getUserByName(this.user1.getUserName());
-		twitter.addTweet(user1.getId(), "Kundera is so much fun!", user1.getUserName());
-	}
-	*/
-	public void test() {
-		addUser();
-		//follow();
-		//tweet();
-	}
-	
+public class TestMongoDB extends TestCase
+{
+    User user1;
+
+    User user2;
+
+    Twitter twitter;
+
+    @Override
+    protected void setUp() throws Exception
+    {
+        super.setUp();
+
+        twitter = new Twingo("twingo");
+
+    }
+
+    @Override
+    protected void tearDown() throws Exception
+    {
+        super.tearDown();
+        twitter.close();
+    }
+
+    public void addUser()
+    {
+        twitter.addUser("0001", "Amresh", "password1", "married");
+        twitter.addUser("0002", "Saurabh", "password2", "single");
+    }
+
+    /*
+     * public void follow() { User user1 =
+     * twitter.getUserByName(this.user1.getUserName()); User user2 =
+     * twitter.getUserByName(this.user2.getUserName());
+     * 
+     * twitter.startFollowing(user2.getId(), user1.getId()); }
+     * 
+     * public void tweet() { User user1 =
+     * twitter.getUserByName(this.user1.getUserName());
+     * twitter.addTweet(user1.getId(), "Kundera is so much fun!",
+     * user1.getUserName()); }
+     */
+    public void test()
+    {
+        addUser();
+        // follow();
+        // tweet();
+    }
 
 }

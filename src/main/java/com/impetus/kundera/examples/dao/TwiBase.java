@@ -10,24 +10,25 @@ import javax.persistence.EntityManager;
  * 
  * @author impetus
  */
-public class TwiBase extends SuperDao 
+public class TwiBase extends SuperDao
 {
     private EntityManager em;
 
     TwiBase()
     {
-        if(em ==null) {
+        if (em == null)
+        {
             try
             {
                 em = init("hbase");
             }
             catch (Exception e)
             {
-            
+
                 System.out.println(e.getMessage());
             }
         }
-        
+
     }
 
     /*
@@ -38,8 +39,9 @@ public class TwiBase extends SuperDao
      */
     public void addUser(String username, String password)
     {
-//        User user = new User(UUID.fromString(username).toString(), username, password);
-//        em.persist(user);
+        // User user = new User(UUID.fromString(username).toString(), username,
+        // password);
+        // em.persist(user);
         em.persist(null);
 
     }
@@ -66,19 +68,19 @@ public class TwiBase extends SuperDao
 
     }
 
-    
     public void addTweet(String userid, String tweetmsg, String userName)
     {
         // TODO Auto-generated method stub
-        
-    }
-    
 
-	public void close() {
-		if(em != null) {
-			em.close();
-		}
-		
-	}
+    }
+
+    public void close()
+    {
+        if (em != null)
+        {
+            em.close();
+        }
+
+    }
 
 }

@@ -50,7 +50,6 @@ import org.apache.thrift.transport.TSocket;
 import org.apache.thrift.transport.TTransport;
 import org.apache.thrift.transport.TTransportException;
 
-// TODO: Auto-generated Javadoc
 /**
  * Test case for Cassandra.
  * 
@@ -78,15 +77,14 @@ public class TwissandraTest extends CassandraQuerySuite
         initClient();
         loadData();
     }
-/*
-    *//**
+
+    /**
      * Test on execute.
-     *//*
+     */
     public void testOnExecute()
     {
         executeQuerySuite();
     }
-    */
    
     /**
      * Test on execute query.

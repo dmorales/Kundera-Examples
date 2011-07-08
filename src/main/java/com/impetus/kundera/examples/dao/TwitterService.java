@@ -20,8 +20,6 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import org.apache.zookeeper.server.quorum.Follower;
-
 import com.impetus.kundera.examples.entities.ExternalLink;
 import com.impetus.kundera.examples.entities.Preference;
 import com.impetus.kundera.examples.entities.Tweet;

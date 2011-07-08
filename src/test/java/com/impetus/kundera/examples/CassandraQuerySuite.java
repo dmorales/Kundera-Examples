@@ -62,8 +62,8 @@ public class CassandraQuerySuite extends TwitterTestSuite
         List<Tweet> user2Tweet = twitter.findTweetByBody("tweet2");
         assertNotNull(user1Tweet);
         assertNotNull(user2Tweet);
-        assertEquals(2, user1Tweet.size());
-        assertEquals(2, user2Tweet.size());
+        assertEquals(1, user1Tweet.size());
+        assertEquals(1, user2Tweet.size());
     }
     
    /**

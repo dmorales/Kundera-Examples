@@ -20,6 +20,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import org.apache.zookeeper.server.quorum.Follower;
+
 import com.impetus.kundera.examples.entities.ExternalLink;
 import com.impetus.kundera.examples.entities.Preference;
 import com.impetus.kundera.examples.entities.Tweet;
@@ -129,5 +131,18 @@ public class TwitterService extends SuperDao implements Twitter
         {
             return users.get(0).getTweets();
         }
+    }
+
+    @Override
+    public List<User> getFollowers(String userId)
+    {
+        Query q = em.createQuery("select u from User u where u.userId =:userId");
+        q.setParameter("userId", userId);
+        List<User> users = q.getResultList();
+        if (users == null || users.isEmpty())
+        {
+            return null;
+        }
+        return users.get(0).getFollowers(); 
     }
 }

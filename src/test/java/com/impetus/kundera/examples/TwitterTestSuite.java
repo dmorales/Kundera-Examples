@@ -19,14 +19,14 @@ import java.util.List;
 
 import junit.framework.TestCase;
 
-import com.impetus.kundera.examples.dao.TwitterService;
 import com.impetus.kundera.examples.dao.Twitter;
+import com.impetus.kundera.examples.dao.TwitterService;
 import com.impetus.kundera.examples.entities.Preference;
 import com.impetus.kundera.examples.entities.Tweet;
+import com.impetus.kundera.examples.entities.User;
 
 /**
  * Test case for MongoDB.
- *
  * @author amresh.singh
  */
 public class TwitterTestSuite extends TestCase
@@ -41,8 +41,11 @@ public class TwitterTestSuite extends TestCase
     /** The twitter. */
     Twitter twitter;
 
-    /* (non-Javadoc)
-     * @see junit.framework.TestCase#setUp()
+    /**
+     * Sets the up internal.
+     *
+     * @param persistenceUnitName the new up internal
+     * @throws Exception the exception
      */
     protected void setUpInternal(String persistenceUnitName) throws Exception
     {
@@ -55,6 +58,11 @@ public class TwitterTestSuite extends TestCase
 
     /* (non-Javadoc)
      * @see junit.framework.TestCase#tearDown()
+     */
+    /**
+     * Tear down internal.
+     *
+     * @throws Exception the exception
      */
     protected void tearDownInternal() throws Exception
     {
@@ -71,9 +79,9 @@ public class TwitterTestSuite extends TestCase
         addExternalLinks();
         addTweets();
         user1FollowsUser2();
-        user1FollowsUser2();
-        user1AddsUser2AsFollower();
+//        user1AddsUser2AsFollower();
         getAllTweets();
+        getAllFollowers();
     }
     
     /**
@@ -139,23 +147,22 @@ public class TwitterTestSuite extends TestCase
         List<Tweet> tweetsUser1 = twitter.getAllTweets(userId1);
         List<Tweet> tweetsUser2 = twitter.getAllTweets(userId2);
         
-        System.out.println(tweetsUser1);
-        System.out.println(tweetsUser2);
+        assertNotNull(tweetsUser1);
+        assertNotNull(tweetsUser2);
         
     }
    
     /**
-     * Test.
+     * Gets the all followers.
+     *
+     * @return the all followers
      */
-    public void test()
+    public void getAllFollowers()
     {
-        //addUsers();
-        //savePreference();
-        //addExternalLinks();
-        //addTweets();
-        //user1FollowsUser2();
-        getAllTweets();
+        List<User> follower1 = twitter.getFollowers(userId1);
+        List<User> follower2 = twitter.getFollowers(userId2);
         
+        assertNull(follower1);
+        assertNotNull(follower2);
     }
-
 }

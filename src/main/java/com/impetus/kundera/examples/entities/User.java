@@ -39,11 +39,12 @@ public class User implements Serializable
     private List<Tweet> tweets;
 
     // Embedded collection, will persist co-located
-    @Embedded
+    @OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
     private List<User> friends; // List of users whom I follow
 
     // Embedded collection, will persist co-located
-    @Embedded
+    
+    @OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
     private List<User> followers; // List of users who are following me
 
     // One-to-one, will be persisted separately

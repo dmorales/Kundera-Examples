@@ -2,9 +2,11 @@ package com.impetus.kundera.examples.dao;
 
 import java.util.List;
 
-import com.impetus.kundera.examples.entities.ExternalLink;
+import org.apache.zookeeper.server.quorum.Follower;
+
 import com.impetus.kundera.examples.entities.Preference;
 import com.impetus.kundera.examples.entities.Tweet;
+import com.impetus.kundera.examples.entities.User;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -75,6 +77,14 @@ public interface Twitter
      * @return the all tweets
      */
     List<Tweet> getAllTweets(String userId);
+    
+    /**
+     * Returns a list of followers.
+     * @param userId user id
+     * @return list of all followers.
+     */
+    List<User> getFollowers(String userId);
+    
     
     /**
      * Close.

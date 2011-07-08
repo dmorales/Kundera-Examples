@@ -72,14 +72,13 @@ public class TwitterTestSuite extends TestCase
     /**
      * Execute suite.
      */
-    public void executeSuite()
+    protected void executeQuerySuite()
     {
         addUsers();
         savePreference();
         addExternalLinks();
         addTweets();
         user1FollowsUser2();
-//        user1AddsUser2AsFollower();
         getAllTweets();
         getAllFollowers();
     }
@@ -87,7 +86,7 @@ public class TwitterTestSuite extends TestCase
     /**
      * Adds the users.
      */
-    public void addUsers()
+    protected void addUsers()
     {
         twitter.addUser(userId1, "Amresh", "password1", "married");
         twitter.addUser(userId2, "Saurabh", "password2", "single");
@@ -96,7 +95,7 @@ public class TwitterTestSuite extends TestCase
     /**
      * Save preference.
      */
-    public void savePreference()
+    protected void savePreference()
     {
         twitter.savePreference(userId1, new Preference("Motif", "2"));
         twitter.savePreference(userId2, new Preference("High Contrast", "3"));
@@ -105,7 +104,7 @@ public class TwitterTestSuite extends TestCase
     /**
      * Adds the external links.
      */
-    public void addExternalLinks() {
+    protected void addExternalLinks() {
         twitter.addExternalLink(userId1, "Facebook", "http://facebook.com/coolnerd");
         twitter.addExternalLink(userId1, "LinkedIn", "http://linkedin.com/in/devilmate");
         
@@ -116,7 +115,7 @@ public class TwitterTestSuite extends TestCase
     /**
      * Adds the tweets.
      */
-    public void addTweets() {
+    protected void addTweets() {
         twitter.addTweet(userId1, "Here is my first tweet", "Web");
         twitter.addTweet(userId1, "Here is my second tweet", "Mobile");
         
@@ -127,14 +126,14 @@ public class TwitterTestSuite extends TestCase
     /**
      * User1 follows user2.
      */
-    public void user1FollowsUser2() {
+    protected void user1FollowsUser2() {
         twitter.startFollowing(userId1, userId2);
     }
     
     /**
      * User1 adds user2 as follower.
      */
-    public void user1AddsUser2AsFollower() {
+    protected void user1AddsUser2AsFollower() {
         twitter.addFollower(userId1, userId2);
     }
     
@@ -143,7 +142,7 @@ public class TwitterTestSuite extends TestCase
      *
      * @return the all tweets
      */
-    public void getAllTweets() {
+    protected void getAllTweets() {
         List<Tweet> tweetsUser1 = twitter.getAllTweets(userId1);
         List<Tweet> tweetsUser2 = twitter.getAllTweets(userId2);
         
@@ -157,7 +156,7 @@ public class TwitterTestSuite extends TestCase
      *
      * @return the all followers
      */
-    public void getAllFollowers()
+    protected void getAllFollowers()
     {
         List<User> follower1 = twitter.getFollowers(userId1);
         List<User> follower2 = twitter.getFollowers(userId2);

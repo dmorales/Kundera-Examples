@@ -50,18 +50,20 @@ import org.apache.thrift.transport.TSocket;
 import org.apache.thrift.transport.TTransport;
 import org.apache.thrift.transport.TTransportException;
 
+// TODO: Auto-generated Javadoc
 /**
  * Test case for Cassandra.
  * 
  * @author amresh.singh
  */
-public class TestTwissandra extends TwitterTestSuite
+public class TwissandraTest extends CassandraQuerySuite
 {
 
     /** The client. */
     private Cassandra.Client client;
     
-    private static final Log LOG = LogFactory.getLog(TestTwissandra.class);
+    /** The Constant LOG. */
+    private static final Log LOG = LogFactory.getLog(TwissandraTest.class);
 
     /*
      * (non-Javadoc)
@@ -76,15 +78,23 @@ public class TestTwissandra extends TwitterTestSuite
         initClient();
         loadData();
     }
-
-    /**
+/*
+    *//**
      * Test on execute.
-     */
+     *//*
     public void testOnExecute()
     {
-        executeSuite();
+        executeQuerySuite();
     }
-    
+    */
+   
+    /**
+     * Test on execute query.
+     */
+    public void testOnQuery()
+    {
+        executeQuerySuite();   
+    }
     /*
      * (non-Javadoc)
      * 
@@ -183,11 +193,10 @@ public class TestTwissandra extends TwitterTestSuite
 
     /**
      * Standard cfmd.
-     * 
-     * @param ksName
-     *            the ks name
-     * @param cfName
-     *            the cf name
+     *
+     * @param ksName the ks name
+     * @param cfName the cf name
+     * @param columnFamilyType the column family type
      * @return the cF meta data
      */
     private static CFMetaData standardCFMD(String ksName, String cfName, ColumnFamilyType columnFamilyType)

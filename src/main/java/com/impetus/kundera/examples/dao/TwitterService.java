@@ -145,4 +145,22 @@ public class TwitterService extends SuperDao implements Twitter
         }
         return users.get(0).getFollowers(); 
     }
+
+    @Override
+    public List<Tweet> findTweetByBody(String tweetBody)
+    {
+        Query q = em.createQuery("select u.body from User u where u.body like :body");
+        q.setParameter("body", tweetBody);
+        List<Tweet> tweets = q.getResultList();
+        return tweets;
+    }
+
+    @Override
+    public List<Tweet> findTweetByDevice(String deviceName)
+    {
+        Query q = em.createQuery("select u.device from User u where u.device like :device");
+        q.setParameter("device", deviceName);
+        List<Tweet> tweets = q.getResultList();
+        return tweets;
+    }
 }

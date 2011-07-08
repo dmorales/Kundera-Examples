@@ -87,6 +87,24 @@ public interface Twitter
     
     
     /**
+     * Find tweet by tweet body.
+     *
+     * @param tweetBody the tweet body
+     * @return the list
+     */
+    List<Tweet> findTweetByBody(String tweetBody);
+    
+    
+    /**
+     * Find tweet by device.
+     *
+     * @param deviceName the device name
+     * @return the list
+     */
+    List<Tweet> findTweetByDevice(String deviceName);
+    
+    
+    /**
      * Close.
      */
     void close();

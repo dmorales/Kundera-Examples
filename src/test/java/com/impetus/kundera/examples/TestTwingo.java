@@ -52,7 +52,7 @@ public class TestTwingo extends TwitterTestSuite
      */
     public void testOnExecute()
     {
-        executeSuite();
+        executeQuerySuite();
     }
     
     /* (non-Javadoc)

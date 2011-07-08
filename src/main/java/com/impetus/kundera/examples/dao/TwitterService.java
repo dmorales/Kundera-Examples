@@ -30,11 +30,11 @@ import com.impetus.kundera.examples.entities.User;
  * 
  * @author amresh.singh
  */
-public class Twingo extends SuperDao implements Twitter
+public class TwitterService extends SuperDao implements Twitter
 {
     private EntityManager em;
 
-    public Twingo(String persistenceUnitName)
+    public TwitterService(String persistenceUnitName)
     {
         if (em == null)
         {

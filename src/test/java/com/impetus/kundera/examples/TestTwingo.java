@@ -15,100 +15,53 @@
  */
 package com.impetus.kundera.examples;
 
-import java.util.List;
-
-import junit.framework.TestCase;
-
-import com.impetus.kundera.examples.dao.Twingo;
 import com.impetus.kundera.examples.dao.Twitter;
-import com.impetus.kundera.examples.entities.Preference;
-import com.impetus.kundera.examples.entities.Tweet;
+import com.impetus.kundera.examples.dao.TwitterService;
 
+// TODO: Auto-generated Javadoc
 /**
- * Test case for MongoDB
- * 
+ * Test case for MongoDB.
+ *
  * @author amresh.singh
  */
-public class TestTwingo extends TestCase
+public class TestTwingo extends TwitterTestSuite
 {
+    
+    /** The user id1. */
     String userId1;
 
+    /** The user id2. */
     String userId2;
 
+    /** The twitter. */
     Twitter twitter;
 
+    /* (non-Javadoc)
+     * @see junit.framework.TestCase#setUp()
+     */
     @Override
     protected void setUp() throws Exception
     {
-        super.setUp();
-        userId1 = "0001";
-        userId2 = "0002";
-
-        twitter = new Twingo("twingo");
-
+        setUpInternal("twingo");
+//         twitter = new TwitterService("twingo");
     }
 
+    
+    /**
+     * Test on execute.
+     */
+    public void testOnExecute()
+    {
+        executeSuite();
+    }
+    
+    /* (non-Javadoc)
+     * @see junit.framework.TestCase#tearDown()
+     */
     @Override
     protected void tearDown() throws Exception
     {
-        super.tearDown();
-        twitter.close();
-    }
-
-    public void addUsers()
-    {
-        twitter.addUser(userId1, "Amresh", "password1", "married");
-        twitter.addUser(userId2, "Saurabh", "password2", "single");
-    }
-
-    public void savePreference()
-    {
-        twitter.savePreference(userId1, new Preference("Motif", "2"));
-        twitter.savePreference(userId2, new Preference("High Contrast", "3"));
-    }
-    
-    public void addExternalLinks() {
-        twitter.addExternalLink(userId1, "Facebook", "http://facebook.com/coolnerd");
-        twitter.addExternalLink(userId1, "LinkedIn", "http://linkedin.com/in/devilmate");
-        
-        twitter.addExternalLink(userId2, "GooglePlus", "http://plus.google.com/inviteme");
-        twitter.addExternalLink(userId2, "Yahoo", "http://yahoo.com/profiles/itsmeamry");        
-    }
-    
-    public void addTweets() {
-        twitter.addTweet(userId1, "Here is my first tweet", "Web");
-        twitter.addTweet(userId1, "Here is my second tweet", "Mobile");
-        
-        twitter.addTweet(userId2, "Here is my first tweet2", "Phone");
-        twitter.addTweet(userId2, "Here is my second tweet2", "text");
-    }
-    
-    public void user1FollowsUser2() {
-        twitter.startFollowing(userId1, userId2);
-    }
-    
-    public void user1AddsUser2AsFollower() {
-        twitter.addFollower(userId1, userId2);
-    }
-    
-    public void getAllTweets() {
-        List<Tweet> tweetsUser1 = twitter.getAllTweets(userId1);
-        List<Tweet> tweetsUser2 = twitter.getAllTweets(userId2);
-        
-        System.out.println(tweetsUser1);
-        System.out.println(tweetsUser2);
-        
-    }
-   
-    public void test()
-    {
-        //addUsers();
-        //savePreference();
-        //addExternalLinks();
-        //addTweets();
-        //user1FollowsUser2();
-        getAllTweets();
-        
+        tearDownInternal();
     }
 
 }

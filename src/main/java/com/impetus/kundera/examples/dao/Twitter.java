@@ -2,13 +2,11 @@ package com.impetus.kundera.examples.dao;
 
 import java.util.List;
 
-import org.apache.zookeeper.server.quorum.Follower;
-
 import com.impetus.kundera.examples.entities.Preference;
 import com.impetus.kundera.examples.entities.Tweet;
 import com.impetus.kundera.examples.entities.User;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * Single window application for Twitter application.
  * Contains methods for performing CRUD operations on users and their tweets.
@@ -16,11 +14,8 @@ import com.impetus.kundera.examples.entities.User;
 public interface Twitter
 {
     
-    
-
     /**
-     * Adds the user.
-     *
+     * Registers a new user with Twitter application
      * @param userId the user id
      * @param name the name
      * @param password the password
@@ -29,16 +24,14 @@ public interface Twitter
     void addUser(String userId, String name, String password, String relationshipStatus);    
 
     /**
-     * Save preference.
-     *
+     * Save preference for a given user
      * @param userId the user id
      * @param preference the preference
      */
     void savePreference(String userId, Preference preference);
 
     /**
-     * Adds the external link.
-     *
+     * Adds an external link for the given user
      * @param userId the user id
      * @param linkType the link type
      * @param linkAddress the link address
@@ -46,8 +39,7 @@ public interface Twitter
     void addExternalLink(String userId, String linkType, String linkAddress);
     
     /**
-     * Adds the tweet.
-     *
+     * Adds a new tweet for a user
      * @param userId the user id
      * @param tweetBody the tweet body
      * @param device the device
@@ -55,31 +47,30 @@ public interface Twitter
     void addTweet(String userId, String tweetBody, String device);
 
     /**
-     * Start following.
-     *
+     * Makes User whose row key is <code>userId</code> follow a user whose row key 
+     * is <code>friendUserId</code>
      * @param userId the user id
      * @param friendUserId the friend user id
      */
     void startFollowing(String userId, String friendUserId);
 
     /**
-     * Adds the follower.
-     *
+     * Adds the follower whose row key is <code>followerUserId</code> to User whose
+     * row key is <code>userId</code>
      * @param userId the user id
      * @param followerUserId the follower user id
      */
     void addFollower(String userId, String followerUserId);
 
     /**
-     * Gets the all tweets.
-     *
+     * Retrieves all tweets for a given user
      * @param userId the user id
      * @return the all tweets
      */
     List<Tweet> getAllTweets(String userId);
     
     /**
-     * Returns a list of followers.
+     * Returns a list of followers for a given user.
      * @param userId user id
      * @return list of all followers.
      */

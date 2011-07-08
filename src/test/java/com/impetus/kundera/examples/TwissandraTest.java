@@ -72,18 +72,18 @@ public class TwissandraTest extends CassandraQuerySuite
     @Override
     protected void setUp() throws Exception
     {
-        startCassandraServer();
-        setUpInternal("twissandra");
-        initClient();
-        loadData();
+            startCassandraServer();
+            setUpInternal("twissandra");
+            initClient();
     }
 
     /**
      * Test on execute.
      */
-    public void testOnExecute()
+    public void testOnExecute() throws Exception
     {
-        executeQuerySuite();
+        loadData();
+        executeTestSuite();
         
         user1FollowsUser2();
         getAllFollowers();
@@ -131,7 +131,7 @@ public class TwissandraTest extends CassandraQuerySuite
      * @return true, if successful
      */
 
-    private static boolean checkIfServerRunning()
+    public static boolean checkIfServerRunning()
     {
         try
         {
@@ -160,7 +160,7 @@ public class TwissandraTest extends CassandraQuerySuite
      * @throws InvalidRequestException
      *             the invalid request exception
      */
-    private void loadData() throws org.apache.cassandra.config.ConfigurationException, TException, NotFoundException,
+    public void loadData() throws org.apache.cassandra.config.ConfigurationException, TException, NotFoundException,
             InvalidRequestException
     {
 

@@ -49,7 +49,7 @@ public class MongoDBQuerySuite extends TwitterTestSuite
     /**
      * Execute suite.
      */
-    public void executeQuerySuite()
+    public void executeTestSuite()
     {
         addUsers();
         savePreference();

@@ -66,13 +66,16 @@ public class TwitterTestSuite extends TestCase
      */
     protected void tearDownInternal() throws Exception
     {
-        twitter.close();
+        if (twitter != null)
+        {
+            twitter.close();
+        }
     }
 
     /**
      * Execute suite.
      */
-    protected void executeQuerySuite()
+    protected void executeTestSuite()
     {
         addUsers();
         savePreference();

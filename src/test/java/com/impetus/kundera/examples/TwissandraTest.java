@@ -84,6 +84,9 @@ public class TwissandraTest extends CassandraQuerySuite
     public void testOnExecute()
     {
         executeQuerySuite();
+        
+        user1FollowsUser2();
+        getAllFollowers();
     }
    
     /**

@@ -18,13 +18,12 @@ package com.impetus.kundera.examples;
 import com.impetus.kundera.examples.dao.Twitter;
 import com.impetus.kundera.examples.dao.TwitterService;
 
-// TODO: Auto-generated Javadoc
 /**
  * Test case for MongoDB.
  *
  * @author amresh.singh
  */
-public class TestTwingo extends TwitterTestSuite
+public class TestTwingo extends MongoDBQuerySuite
 {
     
     /** The user id1. */
@@ -43,7 +42,6 @@ public class TestTwingo extends TwitterTestSuite
     protected void setUp() throws Exception
     {
         setUpInternal("twingo");
-//         twitter = new TwitterService("twingo");
     }
 
     
@@ -52,7 +50,11 @@ public class TestTwingo extends TwitterTestSuite
      */
     public void testOnExecute()
     {
-        executeTestSuite();
+       executeTestSuite();
+    }
+    
+    public void testOnQuery() {
+        executeQuerySuite();
     }
     
     /* (non-Javadoc)

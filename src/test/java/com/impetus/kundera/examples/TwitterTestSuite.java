@@ -80,7 +80,8 @@ public class TwitterTestSuite extends TestCase
         addUsers();
         savePreference();
         addExternalLinks();
-        addTweets();        
+        addTweets();  
+        user1FollowsUser2();        
         getAllTweets();        
     }
     
@@ -120,8 +121,8 @@ public class TwitterTestSuite extends TestCase
         twitter.addTweet(userId1, "Here is my first tweet", "Web");
         twitter.addTweet(userId1, "Here is my second tweet", "Mobile");
         
-        twitter.addTweet(userId2, "Here is my first tweet2", "Phone");
-        twitter.addTweet(userId2, "Here is my second tweet2", "text");
+        twitter.addTweet(userId2, "And here is first one from me", "Phone");
+        twitter.addTweet(userId2, "Another one from me", "text");
     }
     
     /**

@@ -49,12 +49,8 @@ public class MongoDBQuerySuite extends TwitterTestSuite
     /**
      * Execute suite.
      */
-    public void executeTestSuite()
-    {
-        addUsers();
-        savePreference();
-        addExternalLinks();
-        addTweets();
+    public void executeQuerySuite()
+    {        
         getTweetsByBody();
         getTweetsByDevice();
     }
@@ -65,8 +61,12 @@ public class MongoDBQuerySuite extends TwitterTestSuite
      */
     public void getTweetsByBody()
     {
-        throw new RuntimeException("Nested searching for MongoDB not provided by Kundera currently" +
-        		". feature coming shortly");
+        List<Tweet> user1Tweet = twitter.findTweetByBody("first tweet");
+        List<Tweet> user2Tweet = twitter.findTweetByBody("first one from me");
+        assertNotNull(user1Tweet);
+        assertNotNull(user2Tweet);
+        assertEquals(1, user1Tweet.size());
+        assertEquals(1, user2Tweet.size());
     }
     
    /**
@@ -76,8 +76,12 @@ public class MongoDBQuerySuite extends TwitterTestSuite
     */
    public void getTweetsByDevice()
    {
-       throw new RuntimeException("Nested searching for MongoDB not provided by Kundera currently" +
-       ". feature coming shortly");
+       List<Tweet> webTweets = twitter.findTweetByDevice("Web");
+       List<Tweet> mobileTweets = twitter.findTweetByDevice("Mobile");
+       assertNotNull(webTweets);
+       assertNotNull(mobileTweets);
+       assertEquals(1, webTweets.size());
+       assertEquals(1, mobileTweets.size());
    }     
    
 

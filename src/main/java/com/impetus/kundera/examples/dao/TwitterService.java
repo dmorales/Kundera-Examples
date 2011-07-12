@@ -110,9 +110,6 @@ public class TwitterService extends SuperDao implements Twitter
 
         user.addFollower(follower);
         em.persist(user);
-
-        follower.addFriend(user);
-        em.persist(follower);
     }
 
     @Override

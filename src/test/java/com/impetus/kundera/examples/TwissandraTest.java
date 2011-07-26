@@ -50,6 +50,8 @@ import org.apache.thrift.transport.TSocket;
 import org.apache.thrift.transport.TTransport;
 import org.apache.thrift.transport.TTransportException;
 
+import com.impetus.kundera.examples.query.CassandraQuerySuite;
+
 /**
  * Test case for Cassandra.
  * 
@@ -83,10 +85,7 @@ public class TwissandraTest extends CassandraQuerySuite
     public void testOnExecute() throws Exception
     {
         loadData();
-        executeTestSuite();
-        
-        user1FollowsUser2();
-        getAllFollowers();
+        executeTestSuite();       
     }
    
     /**

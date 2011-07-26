@@ -13,10 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.impetus.kundera.examples;
+package com.impetus.kundera.examples.query;
 
 import java.util.List;
 
+import com.impetus.kundera.examples.TwitterTestSuite;
 import com.impetus.kundera.examples.entities.Tweet;
 
 /**
@@ -52,7 +53,7 @@ public class MongoDBQuerySuite extends TwitterTestSuite
     public void executeQuerySuite()
     {        
         getTweetsByBody();
-        getTweetsByDevice();
+        //getTweetsByDevice();
     }
     /**
      * Gets the tweets by body.
@@ -63,6 +64,7 @@ public class MongoDBQuerySuite extends TwitterTestSuite
     {
         List<Tweet> user1Tweet = twitter.findTweetByBody("first tweet");
         List<Tweet> user2Tweet = twitter.findTweetByBody("first one from me");
+        
         assertNotNull(user1Tweet);
         assertNotNull(user2Tweet);
         assertEquals(1, user1Tweet.size());

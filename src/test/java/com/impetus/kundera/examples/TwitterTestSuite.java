@@ -39,7 +39,7 @@ public class TwitterTestSuite extends TestCase
     String userId2;
 
     /** The twitter. */
-    Twitter twitter;
+    protected Twitter twitter;
 
     /**
      * Sets the up internal.

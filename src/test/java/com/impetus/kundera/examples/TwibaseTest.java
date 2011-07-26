@@ -16,16 +16,14 @@
 package com.impetus.kundera.examples;
 
 import com.impetus.kundera.examples.dao.Twitter;
-import com.impetus.kundera.examples.dao.TwitterService;
+import com.impetus.kundera.examples.query.HBaseQuerySuite;
 
 /**
- * Test case for MongoDB.
- *
+ * Test case for Twitter like application on HBase
  * @author amresh.singh
  */
-public class TestTwingo extends MongoDBQuerySuite
+public class TwibaseTest extends HBaseQuerySuite
 {
-    
     /** The user id1. */
     String userId1;
 
@@ -41,7 +39,7 @@ public class TestTwingo extends MongoDBQuerySuite
     @Override
     protected void setUp() throws Exception
     {
-        setUpInternal("twingo");
+        setUpInternal("twibase");
     }
 
     
@@ -65,5 +63,4 @@ public class TestTwingo extends MongoDBQuerySuite
     {
         tearDownInternal();
     }
-
 }

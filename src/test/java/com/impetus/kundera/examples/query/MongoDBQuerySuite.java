@@ -62,8 +62,8 @@ public class MongoDBQuerySuite extends TwitterTestSuite
      */
     public void getTweetsByBody()
     {
-        List<Tweet> user1Tweet = twitter.findTweetByBody("first tweet");
-        List<Tweet> user2Tweet = twitter.findTweetByBody("first one from me");
+        List<Tweet> user1Tweet = twitter.findTweetByBody("Here");
+        List<Tweet> user2Tweet = twitter.findTweetByBody("Saurabh");
         
         assertNotNull(user1Tweet);
         assertNotNull(user2Tweet);

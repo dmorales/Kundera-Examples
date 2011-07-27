@@ -119,10 +119,10 @@ public class TwitterTestSuite extends TestCase
      */
     protected void addTweets() {
         twitter.addTweet(userId1, "Here is my first tweet", "Web");
-        twitter.addTweet(userId1, "Here is my second tweet", "Mobile");
+        twitter.addTweet(userId1, "Second Tweet from me", "Mobile");
         
-        twitter.addTweet(userId2, "And here is first one from me", "Phone");
-        twitter.addTweet(userId2, "Another one from me", "text");
+        twitter.addTweet(userId2, "Saurabh tweets for the first time", "Phone");
+        twitter.addTweet(userId2, "Another tweet from Saurabh", "text");
     }
     
     /**
@@ -151,6 +151,11 @@ public class TwitterTestSuite extends TestCase
         assertNotNull(tweetsUser1);
         assertNotNull(tweetsUser2);
         
+        assertFalse(tweetsUser1.isEmpty());
+        assertFalse(tweetsUser2.isEmpty());
+        
+        assertEquals(2, tweetsUser1.size());
+        assertEquals(2, tweetsUser2.size());
     }
    
     /**

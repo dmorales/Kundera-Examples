@@ -59,8 +59,8 @@ public class CassandraQuerySuite extends TwitterTestSuite
      */
     public void getTweetsByBody()
     {
-        List<Tweet> user1Tweet = twitter.findTweetByBody("tweet");
-        List<Tweet> user2Tweet = twitter.findTweetByBody("from me");
+        List<Tweet> user1Tweet = twitter.findTweetByBody("Here");
+        List<Tweet> user2Tweet = twitter.findTweetByBody("Saurabh");
         assertNotNull(user1Tweet);
         assertNotNull(user2Tweet);
         assertEquals(1, user1Tweet.size());

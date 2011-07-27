@@ -53,7 +53,7 @@ public class HBaseQuerySuite extends TwitterTestSuite
     public void executeQuerySuite()
     {        
         getTweetsByBody();
-        //getTweetsByDevice();
+        getTweetsByDevice();
     }
     /**
      * Gets the tweets by body.
@@ -62,13 +62,13 @@ public class HBaseQuerySuite extends TwitterTestSuite
      */
     public void getTweetsByBody()
     {
-        List<Tweet> user1Tweet = twitter.findTweetByBody("first tweet");
-        List<Tweet> user2Tweet = twitter.findTweetByBody("first one from me");
+        List<Tweet> user1Tweet = twitter.findTweetByBody("Here");
+        List<Tweet> user2Tweet = twitter.findTweetByBody("Saurabh");
         
         assertNotNull(user1Tweet);
         assertNotNull(user2Tweet);
-        assertEquals(1, user1Tweet.size());
-        assertEquals(1, user2Tweet.size());
+        assertEquals(2, user1Tweet.size());
+        assertEquals(2, user2Tweet.size());
     }
     
    /**
@@ -82,8 +82,8 @@ public class HBaseQuerySuite extends TwitterTestSuite
        List<Tweet> mobileTweets = twitter.findTweetByDevice("Mobile");
        assertNotNull(webTweets);
        assertNotNull(mobileTweets);
-       assertEquals(1, webTweets.size());
-       assertEquals(1, mobileTweets.size());
+       assertEquals(2, webTweets.size());
+       assertEquals(2, mobileTweets.size());
    }     
    
 }

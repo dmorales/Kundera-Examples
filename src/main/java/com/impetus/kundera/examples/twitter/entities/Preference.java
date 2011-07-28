@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.impetus.kundera.examples.entities;
+package com.impetus.kundera.examples.twitter.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.impetus.kundera.examples.utils.ExampleUtils;
+import com.impetus.kundera.examples.twitter.utils.ExampleUtils;
 
 /**
  * Entity class for User Preferences

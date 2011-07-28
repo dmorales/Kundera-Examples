@@ -13,17 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.impetus.kundera.examples;
+package com.impetus.kundera.examples.twitter;
 
 import java.util.List;
 
 import junit.framework.TestCase;
 
-import com.impetus.kundera.examples.dao.Twitter;
-import com.impetus.kundera.examples.dao.TwitterService;
-import com.impetus.kundera.examples.entities.Preference;
-import com.impetus.kundera.examples.entities.Tweet;
-import com.impetus.kundera.examples.entities.User;
+import com.impetus.kundera.examples.twitter.dao.Twitter;
+import com.impetus.kundera.examples.twitter.dao.TwitterService;
+import com.impetus.kundera.examples.twitter.entities.Preference;
+import com.impetus.kundera.examples.twitter.entities.Tweet;
+import com.impetus.kundera.examples.twitter.entities.User;
 
 /**
  * Test case for MongoDB.

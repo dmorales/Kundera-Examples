@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.impetus.kundera.examples.utils;
+package com.impetus.kundera.examples.twitter.utils;
 
 import java.util.Date;
 import java.util.UUID;

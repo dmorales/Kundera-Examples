@@ -13,17 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.impetus.kundera.examples.dao;
+package com.impetus.kundera.examples.twitter.dao;
 
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import com.impetus.kundera.examples.entities.ExternalLink;
-import com.impetus.kundera.examples.entities.Preference;
-import com.impetus.kundera.examples.entities.Tweet;
-import com.impetus.kundera.examples.entities.User;
+import com.impetus.kundera.examples.twitter.entities.ExternalLink;
+import com.impetus.kundera.examples.twitter.entities.Preference;
+import com.impetus.kundera.examples.twitter.entities.Tweet;
+import com.impetus.kundera.examples.twitter.entities.User;
 
 /**
  * Data access object class for mongo implementation of twitter.

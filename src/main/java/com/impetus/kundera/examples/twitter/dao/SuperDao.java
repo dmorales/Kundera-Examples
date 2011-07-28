@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.impetus.kundera.examples.dao;
+package com.impetus.kundera.examples.twitter.dao;
 
 import javax.persistence.EntityManager;
 

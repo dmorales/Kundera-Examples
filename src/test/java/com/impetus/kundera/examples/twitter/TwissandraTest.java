@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.impetus.kundera.examples;
+package com.impetus.kundera.examples.twitter;
 
 import java.io.IOException;
 import java.net.Socket;
@@ -50,7 +50,7 @@ import org.apache.thrift.transport.TSocket;
 import org.apache.thrift.transport.TTransport;
 import org.apache.thrift.transport.TTransportException;
 
-import com.impetus.kundera.examples.query.CassandraQuerySuite;
+import com.impetus.kundera.examples.twitter.query.CassandraQuerySuite;
 
 /**
  * Test case for Cassandra.

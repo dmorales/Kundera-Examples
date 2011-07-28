@@ -29,8 +29,7 @@
 			<property name="kundera.dialect" value="hbase"/>
 			<property name="kundera.client" value="Hbase"/>
 			<property name="kundera.cache.provider_class" value="com.impetus.kundera.cache.ehcache.EhCacheProvider"/>
-            <property name="net.sf.ehcache.configurationResourceName" value="/ehcache-test.xml"/>			
-			<!--  <property name="kundera.client.implementation" value="com.impetus.kundera.hbase.client.HBaseClient.class"/> -->
+            <property name="net.sf.ehcache.configurationResourceName" value="/ehcache-test.xml"/>		
 		</properties>
 	</persistence-unit>
         <persistence-unit name="twingo">

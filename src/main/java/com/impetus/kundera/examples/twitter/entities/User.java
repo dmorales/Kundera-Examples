@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.impetus.kundera.examples.entities;
+package com.impetus.kundera.examples.twitter.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;

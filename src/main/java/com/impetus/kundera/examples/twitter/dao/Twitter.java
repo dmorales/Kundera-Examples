@@ -1,10 +1,10 @@
-package com.impetus.kundera.examples.dao;
+package com.impetus.kundera.examples.twitter.dao;
 
 import java.util.List;
 
-import com.impetus.kundera.examples.entities.Preference;
-import com.impetus.kundera.examples.entities.Tweet;
-import com.impetus.kundera.examples.entities.User;
+import com.impetus.kundera.examples.twitter.entities.Preference;
+import com.impetus.kundera.examples.twitter.entities.Tweet;
+import com.impetus.kundera.examples.twitter.entities.User;
 
 
 /**

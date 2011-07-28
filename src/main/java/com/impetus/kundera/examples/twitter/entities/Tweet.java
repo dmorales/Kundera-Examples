@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.impetus.kundera.examples.entities;
+package com.impetus.kundera.examples.twitter.entities;
 
 import javax.persistence.Embeddable;
 
-import com.impetus.kundera.examples.utils.ExampleUtils;
+import com.impetus.kundera.examples.twitter.utils.ExampleUtils;
 
 /**
  * Class for Tweets

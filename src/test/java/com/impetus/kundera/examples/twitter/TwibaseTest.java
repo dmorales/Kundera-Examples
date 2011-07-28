@@ -13,20 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.impetus.kundera.examples;
+package com.impetus.kundera.examples.twitter;
 
-import com.impetus.kundera.examples.dao.Twitter;
-import com.impetus.kundera.examples.dao.TwitterService;
-import com.impetus.kundera.examples.query.MongoDBQuerySuite;
+import com.impetus.kundera.examples.twitter.dao.Twitter;
+import com.impetus.kundera.examples.twitter.query.HBaseQuerySuite;
 
 /**
- * Test case for MongoDB.
- *
+ * Test case for Twitter like application on HBase
  * @author amresh.singh
  */
-public class TwingoTest extends MongoDBQuerySuite
+public class TwibaseTest extends HBaseQuerySuite
 {
-    
     /** The user id1. */
     String userId1;
 
@@ -42,7 +39,7 @@ public class TwingoTest extends MongoDBQuerySuite
     @Override
     protected void setUp() throws Exception
     {
-        setUpInternal("twingo");
+        setUpInternal("twibase");
     }
 
     
@@ -66,5 +63,4 @@ public class TwingoTest extends MongoDBQuerySuite
     {
         tearDownInternal();
     }
-
 }

@@ -13,18 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.impetus.kundera.examples.query;
+package com.impetus.kundera.examples.twitter.query;
 
 import java.util.List;
 
-import com.impetus.kundera.examples.TwitterTestSuite;
-import com.impetus.kundera.examples.entities.Tweet;
+import com.impetus.kundera.examples.twitter.TwitterTestSuite;
+import com.impetus.kundera.examples.twitter.entities.Tweet;
 
 /**
- * Test suite for MongoDB Query
+ * Test suite for HBase query
  * @author amresh.singh
  */
-public class MongoDBQuerySuite extends TwitterTestSuite
+public class HBaseQuerySuite extends TwitterTestSuite
 {
     /**
      * Sets the up internal.
@@ -53,7 +53,7 @@ public class MongoDBQuerySuite extends TwitterTestSuite
     public void executeQuerySuite()
     {        
         getTweetsByBody();
-        //getTweetsByDevice();
+        getTweetsByDevice();
     }
     /**
      * Gets the tweets by body.
@@ -67,8 +67,8 @@ public class MongoDBQuerySuite extends TwitterTestSuite
         
         assertNotNull(user1Tweet);
         assertNotNull(user2Tweet);
-        assertEquals(1, user1Tweet.size());
-        assertEquals(1, user2Tweet.size());
+        assertEquals(2, user1Tweet.size());
+        assertEquals(2, user2Tweet.size());
     }
     
    /**
@@ -82,9 +82,8 @@ public class MongoDBQuerySuite extends TwitterTestSuite
        List<Tweet> mobileTweets = twitter.findTweetByDevice("Mobile");
        assertNotNull(webTweets);
        assertNotNull(mobileTweets);
-       assertEquals(1, webTweets.size());
-       assertEquals(1, mobileTweets.size());
+       assertEquals(2, webTweets.size());
+       assertEquals(2, mobileTweets.size());
    }     
    
-
 }

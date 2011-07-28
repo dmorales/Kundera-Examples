@@ -1,4 +1,4 @@
-package com.impetus.kundera.examples;
+package com.impetus.kundera.examples.twitter;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

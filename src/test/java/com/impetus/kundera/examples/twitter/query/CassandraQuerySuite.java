@@ -1,12 +1,12 @@
 /**
  * 
  */
-package com.impetus.kundera.examples.query;
+package com.impetus.kundera.examples.twitter.query;
 
 import java.util.List;
 
-import com.impetus.kundera.examples.TwitterTestSuite;
-import com.impetus.kundera.examples.entities.Tweet;
+import com.impetus.kundera.examples.twitter.TwitterTestSuite;
+import com.impetus.kundera.examples.twitter.entities.Tweet;
 
 
 /**

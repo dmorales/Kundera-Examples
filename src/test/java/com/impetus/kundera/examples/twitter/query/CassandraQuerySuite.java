@@ -45,10 +45,6 @@ public class CassandraQuerySuite extends TwitterTestSuite
      */
     public void executeQuerySuite()
     {
-//        addUsers();
-//        savePreference();
-//        addExternalLinks();
-//        addTweets();
         getTweetsByBody();
         getTweetsByDevice();
     }

@@ -29,7 +29,7 @@ import com.impetus.kundera.examples.twitter.utils.ExampleUtils;
  */
 
 @Entity
-@Table(name = "externalLinks", schema = "Kundera-Examples")
+@Table(name = "externalLinks", schema = "KunderaExamples")
 public class ExternalLink
 {
 

@@ -23,7 +23,7 @@ import javax.persistence.Table;
  * 
  */
 @Entity
-@Table(name = "users", schema = "Kundera-Examples")
+@Table(name = "users", schema = "KunderaExamples")
 public class User implements Serializable
 {
 

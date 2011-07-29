@@ -6,15 +6,14 @@
 	<persistence-unit name="twissandra">
 		<provider>com.impetus.kundera.ejb.KunderaPersistence</provider>		
 		<properties>
-<!--			<property name="server.config" value="/usr/local/cassandra/conf/cassandra.yaml"/>-->
+			<property name="server.config" value="/usr/local/cassandra/conf/cassandra.yaml"/>
 			<property name="kundera.nodes" value="localhost"/>
 			<property name="kundera.port" value="9165"/>
-			<property name="kundera.keyspace" value="Kundera-Examples"/>
+			<property name="kundera.keyspace" value="KunderaExamples"/>
 			<property name="kundera.dialect" value="cassandra"/>
 			<property name="kundera.client" value="Pelops"/>
 			<property name="kundera.cache.provider_class" value="com.impetus.kundera.cache.ehcache.EhCacheProvider"/>
-            <property name="net.sf.ehcache.configurationResourceName" value="/ehcache-test.xml"/>			
-   			<!--  <property name="kundera.client.implementation" value="com.impetus.kundera.client.PelopsClient.class"/> -->
+            <property name="net.sf.ehcache.configurationResourceName" value="/ehcache-test.xml"/>   			
 		</properties>
 		
 	</persistence-unit>
@@ -25,7 +24,7 @@
 		<properties>
 			<property name="kundera.nodes" value="localhost"/>
 			<property name="kundera.port" value="9165"/>
-			<property name="kundera.keyspace" value="Kundera-Examples"/>
+			<property name="kundera.keyspace" value="KunderaExamples"/>
 			<property name="kundera.dialect" value="hbase"/>
 			<property name="kundera.client" value="Hbase"/>
 			<property name="kundera.cache.provider_class" value="com.impetus.kundera.cache.ehcache.EhCacheProvider"/>
@@ -37,7 +36,7 @@
 		<properties>
 			<property name="kundera.nodes" value="localhost"/>
 			<property name="kundera.port" value="27017"/>
-			<property name="kundera.keyspace" value="Kundera-Examples"/>
+			<property name="kundera.keyspace" value="KunderaExamples"/>
 			<property name="kundera.dialect" value="mongodb"/>
 			<property name="kundera.client" value="MongoDB"/>
 		</properties>

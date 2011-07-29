@@ -29,7 +29,7 @@ import com.impetus.kundera.examples.twitter.utils.ExampleUtils;
  */
 
 @Entity
-@Table(name = "preference", schema = "Kundera-Examples")
+@Table(name = "preference", schema = "KunderaExamples")
 public class Preference
 {
 
